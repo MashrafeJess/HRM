@@ -1,0 +1,2 @@
+﻿
+scaffold-DbContext "Data Source=(localdb)\MSSQLLocalDB;Database=HRM;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir "Models" -ContextDir "Context" -Context "AppDbContext"  -t dbo.Attendance, dbo.Company,dbo.Department,dbo.Employee,dbo.LeaveRequest,dbo.Payroll,dbo.LeaveType,dbo.Role, dbo.RefreshToken, dbo.AIConversation, dbo.AIReport, dbo.AIAuditLog -f

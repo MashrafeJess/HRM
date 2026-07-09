@@ -1,0 +1,17 @@
+C:\Users\iBOS\source\repos\HRM\infrastructure\bin\Debug\net10.0\infrastructure.deps.json
+C:\Users\iBOS\source\repos\HRM\infrastructure\bin\Debug\net10.0\infrastructure.dll
+C:\Users\iBOS\source\repos\HRM\infrastructure\bin\Debug\net10.0\infrastructure.pdb
+C:\Users\iBOS\source\repos\HRM\infrastructure\obj\Debug\net10.0\infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\iBOS\source\repos\HRM\infrastructure\obj\Debug\net10.0\infrastructure.AssemblyInfoInputs.cache
+C:\Users\iBOS\source\repos\HRM\infrastructure\obj\Debug\net10.0\infrastructure.AssemblyInfo.cs
+C:\Users\iBOS\source\repos\HRM\infrastructure\obj\Debug\net10.0\infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\iBOS\source\repos\HRM\infrastructure\obj\Debug\net10.0\infrastructure.dll
+C:\Users\iBOS\source\repos\HRM\infrastructure\obj\Debug\net10.0\refint\infrastructure.dll
+C:\Users\iBOS\source\repos\HRM\infrastructure\obj\Debug\net10.0\infrastructure.pdb
+C:\Users\iBOS\source\repos\HRM\infrastructure\obj\Debug\net10.0\ref\infrastructure.dll
+C:\Users\iBOS\source\repos\HRM\infrastructure\obj\Debug\net10.0\Infrastructure.csproj.AssemblyReference.cache
+C:\Users\iBOS\source\repos\HRM\infrastructure\bin\Debug\net10.0\Domain.dll
+C:\Users\iBOS\source\repos\HRM\infrastructure\bin\Debug\net10.0\Domain.pdb
+C:\Users\iBOS\source\repos\HRM\infrastructure\obj\Debug\net10.0\Infrastr.15EFFBFE.Up2Date
+C:\Users\iBOS\source\repos\HRM\infrastructure\bin\Debug\net10.0\Application.dll
+C:\Users\iBOS\source\repos\HRM\infrastructure\bin\Debug\net10.0\Application.pdb

@@ -1,0 +1,330 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\iBOS\\source\\repos\\HRM\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A9464F1F-C4D0-4518-B305-1A0F007E51F6}|Web API\\Web API.csproj|c:\\users\\ibos\\source\\repos\\hrm\\web api\\web api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A9464F1F-C4D0-4518-B305-1A0F007E51F6}|Web API\\Web API.csproj|solutionrelative:web api\\web api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DC6828B-2F47-4B1A-BC30-E64C8D41931D}|Domain\\Domain.csproj|c:\\users\\ibos\\source\\repos\\hrm\\domain\\interface\\itokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DC6828B-2F47-4B1A-BC30-E64C8D41931D}|Domain\\Domain.csproj|solutionrelative:domain\\interface\\itokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6AEFCD10-728D-4E21-8CBE-BD444CFC0B36}|infrastructure\\Infrastructure.csproj|c:\\users\\ibos\\source\\repos\\hrm\\infrastructure\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6AEFCD10-728D-4E21-8CBE-BD444CFC0B36}|infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\features\\auth\\refresh\\refreshcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\refresh\\refreshcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DC6828B-2F47-4B1A-BC30-E64C8D41931D}|Domain\\Domain.csproj|c:\\users\\ibos\\source\\repos\\hrm\\domain\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DC6828B-2F47-4B1A-BC30-E64C8D41931D}|Domain\\Domain.csproj|solutionrelative:domain\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\features\\auth\\login\\logincommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\login\\logincommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6AEFCD10-728D-4E21-8CBE-BD444CFC0B36}|infrastructure\\Infrastructure.csproj|c:\\users\\ibos\\source\\repos\\hrm\\infrastructure\\repositories\\authrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6AEFCD10-728D-4E21-8CBE-BD444CFC0B36}|infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\authrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\features\\auth\\logout\\logoutcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\logout\\logoutcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\features\\auth\\logout\\logoutcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\logout\\logoutcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\features\\auth\\refresh\\refreshcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\refresh\\refreshcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\dtos\\authresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\dtos\\authresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\features\\auth\\login\\logincommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\login\\logincommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\common\\interfaces\\iapplicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\common\\interfaces\\iapplicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DC6828B-2F47-4B1A-BC30-E64C8D41931D}|Domain\\Domain.csproj|c:\\users\\ibos\\source\\repos\\hrm\\domain\\interface\\iauthrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DC6828B-2F47-4B1A-BC30-E64C8D41931D}|Domain\\Domain.csproj|solutionrelative:domain\\interface\\iauthrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DC6828B-2F47-4B1A-BC30-E64C8D41931D}|Domain\\Domain.csproj|c:\\users\\ibos\\source\\repos\\hrm\\domain\\models\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DC6828B-2F47-4B1A-BC30-E64C8D41931D}|Domain\\Domain.csproj|solutionrelative:domain\\models\\refreshtoken.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6AEFCD10-728D-4E21-8CBE-BD444CFC0B36}|infrastructure\\Infrastructure.csproj|c:\\users\\ibos\\source\\repos\\hrm\\infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6AEFCD10-728D-4E21-8CBE-BD444CFC0B36}|infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9464F1F-C4D0-4518-B305-1A0F007E51F6}|Web API\\Web API.csproj|c:\\users\\ibos\\source\\repos\\hrm\\web api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A9464F1F-C4D0-4518-B305-1A0F007E51F6}|Web API\\Web API.csproj|solutionrelative:web api\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3DC6828B-2F47-4B1A-BC30-E64C8D41931D}|Domain\\Domain.csproj|c:\\users\\ibos\\source\\repos\\hrm\\domain\\dbcontexts\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3DC6828B-2F47-4B1A-BC30-E64C8D41931D}|Domain\\Domain.csproj|solutionrelative:domain\\dbcontexts\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Web API",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Web API\\Web API.csproj",
+              "RelativeDocumentMoniker": "Web API\\Web API.csproj",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Web API\\Web API.csproj",
+              "RelativeToolTip": "Web API\\Web API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-07-06T04:46:01.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Models\\Employee.cs",
+              "RelativeDocumentMoniker": "Domain\\Models\\Employee.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Models\\Employee.cs",
+              "RelativeToolTip": "Domain\\Models\\Employee.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAIwCkAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T17:50:43.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\infrastructure\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "infrastructure\\Services\\TokenService.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\infrastructure\\Services\\TokenService.cs",
+              "RelativeToolTip": "infrastructure\\Services\\TokenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T17:47:04.457Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AuthRepository.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\infrastructure\\Repositories\\AuthRepository.cs",
+              "RelativeDocumentMoniker": "infrastructure\\Repositories\\AuthRepository.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\infrastructure\\Repositories\\AuthRepository.cs",
+              "RelativeToolTip": "infrastructure\\Repositories\\AuthRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T17:45:16.457Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LogoutCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Logout\\LogoutCommandHandler.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Logout\\LogoutCommandHandler.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Logout\\LogoutCommandHandler.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Logout\\LogoutCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T17:42:44.641Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LogoutCommand.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Logout\\LogoutCommand.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Logout\\LogoutCommand.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Logout\\LogoutCommand.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Logout\\LogoutCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T17:42:15.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RefreshCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Refresh\\RefreshCommandHandler.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Refresh\\RefreshCommandHandler.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Refresh\\RefreshCommandHandler.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Refresh\\RefreshCommandHandler.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAMwB0AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T16:46:21.426Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "RefreshCommand.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Refresh\\RefreshCommand.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Refresh\\RefreshCommand.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Refresh\\RefreshCommand.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Refresh\\RefreshCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAUAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T16:43:05.972Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LoginCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Login\\LoginCommandHandler.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Login\\LoginCommandHandler.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Login\\LoginCommandHandler.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Login\\LoginCommandHandler.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAMwBwAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T16:37:08.377Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "LoginCommand.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Login\\LoginCommand.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Login\\LoginCommand.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Login\\LoginCommand.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Login\\LoginCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T16:33:52.603Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "RefreshToken.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Models\\RefreshToken.cs",
+              "RelativeDocumentMoniker": "Domain\\Models\\RefreshToken.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Models\\RefreshToken.cs",
+              "RelativeToolTip": "Domain\\Models\\RefreshToken.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T16:18:11.139Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\infrastructure\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "infrastructure\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\infrastructure\\DependencyInjection.cs",
+              "RelativeToolTip": "infrastructure\\DependencyInjection.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T16:14:40.605Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Common\\Interfaces\\IApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Application\\Common\\Interfaces\\IApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Common\\Interfaces\\IApplicationDbContext.cs",
+              "RelativeToolTip": "Application\\Common\\Interfaces\\IApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T16:13:50.936Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AuthResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\DTOs\\AuthResponseDto.cs",
+              "RelativeDocumentMoniker": "Application\\DTOs\\AuthResponseDto.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\DTOs\\AuthResponseDto.cs",
+              "RelativeToolTip": "Application\\DTOs\\AuthResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAIAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T16:12:11.043Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\DTOs\\LoginDto.cs",
+              "RelativeDocumentMoniker": "Application\\DTOs\\LoginDto.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\DTOs\\LoginDto.cs",
+              "RelativeToolTip": "Application\\DTOs\\LoginDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T16:12:00.707Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ITokenService.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Interface\\ITokenService.cs",
+              "RelativeDocumentMoniker": "Domain\\Interface\\ITokenService.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Interface\\ITokenService.cs",
+              "RelativeToolTip": "Domain\\Interface\\ITokenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T16:11:33.421Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "IAuthRepository.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Interface\\IAuthRepository.cs",
+              "RelativeDocumentMoniker": "Domain\\Interface\\IAuthRepository.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Interface\\IAuthRepository.cs",
+              "RelativeToolTip": "Domain\\Interface\\IAuthRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T16:11:12.431Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\DbContexts\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Domain\\DbContexts\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\DbContexts\\AppDbContext.cs",
+              "RelativeToolTip": "Domain\\DbContexts\\AppDbContext.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAswAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T16:03:21.005Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Web API\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "Web API\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Web API\\appsettings.Development.json",
+              "RelativeToolTip": "Web API\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-05T15:49:42.701Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
