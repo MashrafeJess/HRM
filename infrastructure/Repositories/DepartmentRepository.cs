@@ -21,7 +21,8 @@ public class DepartmentRepository(IAppDbContext context) : IDepartmentRepository
             {
                 _context.Departments.Update(department);
             }
-
+            await _context.SaveChangesAsync(cancellationToken);
+            
             return department;
         }
         catch (Exception e)

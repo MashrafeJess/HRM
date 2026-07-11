@@ -18,13 +18,16 @@ public class GetCompanyByIdQueryHandler(ICompanyRepository repository) : IReques
 
         return new CompanyDto
         {
+            CompanyId = company.CompanyId,
             CompanyAddress =  company.CompanyAddress,
             CompanyName = company.CompanyName,
             IsActive = company.IsActive,
             LogoUrl =  company.LogoUrl,
             SubscriptionPlan =  company.SubscriptionPlan,
             CompanyEmail =  company.CompanyEmail,
-            CompanyPhone =  company.CompanyPhone
+            CompanyPhone =  company.CompanyPhone,
+            CreatedAt = company.CreatedAt,
+            UpdatedAt = company.UpdatedAt,
         };
     }
 }

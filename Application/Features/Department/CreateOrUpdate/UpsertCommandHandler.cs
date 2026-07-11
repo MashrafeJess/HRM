@@ -20,7 +20,7 @@ public class UpsertCommandHandler(IDepartmentRepository departmentRepository) : 
                 CompanyId = dto.CompanyId,
                 DepartmentName = dto.DepartmentName,
                 Description = dto.Description,
-                IsActive = dto.IsActive,
+                IsActive = true,
                 CreatedAt = DateTime.UtcNow
             };
         }

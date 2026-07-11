@@ -18,11 +18,14 @@ public class GetDepartmentByIdQueryHandler(IDepartmentRepository repository) : I
 
         return new DepartmentDto
         {
+            DepartmentId =  department.DepartmentId,
             CompanyId = department.CompanyId,
             DepartmentName = department.DepartmentName,
             Description = department.Description,
             IsActive = department.IsActive,
             EmployeeCount = employeeCount,
+            CreatedAt =  department.CreatedAt,
+            UpdatedAt = department.UpdatedAt
         };
     }
 }

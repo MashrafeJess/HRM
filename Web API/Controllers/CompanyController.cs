@@ -10,7 +10,7 @@ namespace Web_API.Controllers;
 [Route("api/[controller]")]
 public class CompanyController(IMediator mediator) : ControllerBase
 {
-    [HttpPost]
+    [HttpPost("EditCompany")]
     public async Task<IActionResult> Handle(CreateOrUpdateCompanyUpSertCommand request,
         CancellationToken cancellationToken)
     {
@@ -18,16 +18,17 @@ public class CompanyController(IMediator mediator) : ControllerBase
         return Ok(company);
     }
 
-    [HttpGet]
+    [HttpGet("GetAllCompany")]
     public async Task<IActionResult> GetCompanies([FromQuery] GetCompaniesQuery query, CancellationToken ct)
     {
         var result =  await mediator.Send(query, ct);
         return Ok(result);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetCompanyById([FromRoute] GetCompanyByIdQuery query, CancellationToken ct)
+    [HttpGet("GetCompanyById/{companyId:long}")]
+    public async Task<IActionResult> GetCompanyById(long companyId, CancellationToken ct)
     {
+        var query = new GetCompanyByIdQuery(companyId);
         var result = await mediator.Send(query, ct);
         return Ok(result);
     }

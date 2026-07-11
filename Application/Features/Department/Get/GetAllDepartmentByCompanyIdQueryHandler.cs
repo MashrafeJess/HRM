@@ -11,9 +11,12 @@ public class GetAllDepartmentByCompanyIdQueryHandler(IDepartmentRepository repos
     {
         var departments = await _repository.GetAllDepartments(request.CompanyId, cancellationToken);
         return departments.Select(d=> new DepartmentDto
-            {
-                CompanyId = d.CompanyId,
-                
-            }).ToList();
+        {
+            DepartmentId = d.DepartmentId,
+            CompanyId = d.CompanyId,
+            DepartmentName = d.DepartmentName,
+            Description = d.Description,
+            IsActive = d.IsActive,
+        }).ToList();
     }
 }

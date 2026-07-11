@@ -2,6 +2,8 @@
 using Application.DTOs;
 using Application.Features.Company.CreateOrUpdate;
 using Application.Features.Company.Get;
+using Application.Features.Department.CreateOrUpdate;
+using Application.Features.Department.Get;
 using Application.Features.Department.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +16,8 @@ public class DepartmentController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
 
-    [HttpPost]
-    public async Task<ActionResult<DepartmentDto>> CreateDepartment(CreateOrUpdateCompanyUpSertCommand command, CancellationToken ct = default)
+    [HttpPost("EditDepartment")]
+    public async Task<ActionResult<DepartmentDto>> CreateDepartment(UpsertDepartmentCommand command, CancellationToken ct = default)
     {
         try
         {
@@ -24,16 +26,32 @@ public class DepartmentController(IMediator mediator) : ControllerBase
         }
         catch (Exception e)
         {
-            throw new BadRequestException("Couldn't Create Company : "+e.Message);
+            throw new BadRequestException("Couldn't Create Department : "+e.Message);
 
         }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetDepartments(GetCompaniesQuery query ,CancellationToken ct = default)
+    [HttpGet("AllDepartmentsByCompanyId/{companyId:long}")]
+    public async Task<IActionResult> GetDepartments([FromRoute] long companyId ,CancellationToken ct = default)
     {
         try
         {
+            var query = new GetAllDepartmentByCompanyIdQuery(companyId);    
+            var result = await _mediator.Send(query, ct);
+            return Ok(result);
+        }
+        catch (Exception e)
+        {
+            throw new BadRequestException("Couldn't fetch Departments : "+e.Message);
+        }
+    }
+
+    [HttpGet("GetDepartmentById{departmentId:long}")]
+    public async Task<IActionResult> GetDepartmentById(long departmentId, CancellationToken ct = default)
+    {
+        try
+        {
+            var query = new GetDepartmentByIdQuery(departmentId);
             var result = await _mediator.Send(query, ct);
             return Ok(result);
         }
@@ -42,20 +60,4 @@ public class DepartmentController(IMediator mediator) : ControllerBase
             throw new BadRequestException("Couldn't fetch Companies : "+e.Message);
         }
     }
-
-    [HttpGet]
-    public async Task<IActionResult> GetDepartmentById(GetDepartmentByIdQuery query, CancellationToken ct = default)
-    {
-        try
-        {
-            var result = await _mediator.Send(query, ct);
-            return Ok(result);
-        }
-        catch (Exception e)
-        {
-            throw new BadRequestException("Couldn't fetch Companies : "+e.Message);
-        }
-    }
-    
-
 }

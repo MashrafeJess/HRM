@@ -28,11 +28,11 @@ public class UpSertCommandHandler(IEmployeeRepository repository, IAuthRepositor
                 Gender =  request.Dto.Gender,
                 IsActive = true,
                 JoinDate = DateTime.UtcNow,
-                PasswordHash = new PasswordHasher<Domain.Models.Employee>().HashPassword(employee!, request.Dto.PasswordHash),
+                PasswordHash = new PasswordHasher<Domain.Models.Employee>().HashPassword(employee!, request.Dto.Password ?? throw new ArgumentNullException(nameof(request.Dto.Password))),
                 Phone =  request.Dto.Phone,
                 Salary =  request.Dto.Salary,
                 Status =  request.Dto.Status,
-                RoleId = request.Dto.RoleId,
+                RoleId = request.Dto.RoleId ?? 0,
             };
         }
         else
@@ -45,10 +45,10 @@ public class UpSertCommandHandler(IEmployeeRepository repository, IAuthRepositor
             employee.DepartmentId = request.Dto.DepartmentId;
             employee.Salary = request.Dto.Salary;
             employee.Status = request.Dto.Status;
-            employee.RoleId = request.Dto.RoleId;
+            employee.RoleId = request.Dto.RoleId ?? 0;
             employee.IsActive = request.Dto.IsActive ?? false;
             employee.JoinDate = DateTime.UtcNow;
-            employee.PasswordHash = new PasswordHasher<Domain.Models.Employee>().HashPassword(employee, request.Dto.PasswordHash);
+            employee.PasswordHash = new PasswordHasher<Domain.Models.Employee>().HashPassword(employee, request.Dto.Password ?? throw new ArgumentNullException(nameof(request.Dto.Password)));
             employee.Phone = request.Dto.Phone;
             employee.CompanyId = request.Dto.CompanyId;
             employee.DateOfBirth = request.Dto.DateOfBirth;
@@ -56,24 +56,8 @@ public class UpSertCommandHandler(IEmployeeRepository repository, IAuthRepositor
             employee.UpdatedAt = DateTime.UtcNow;
         }
 
-        await _repository.EditEmployee(employee, cancellationToken);
-        return new EmployeeDto()
-        {
-            Email = employee.Email,
-            CompanyId =  employee.CompanyId,
-            FirstName = employee.FirstName,
-            LastName = employee.LastName,
-            DateOfBirth = employee.DateOfBirth,
-            Gender = employee.Gender,
-            Status = employee.Status,
-            RoleId = employee.RoleId,
-            Phone = employee.Phone,
-            Salary = employee.Salary,
-            DepartmentId =  employee.DepartmentId,  
-            EmployeeCode =  employee.EmployeeCode,
-            IsActive = employee.IsActive,
-            JoinDate = employee.JoinDate,
-        };
+        var result = await _repository.EditEmployee(employee, cancellationToken);
+        return result;
     }
 
     private async Task<string> GenerateEmployeeCode()

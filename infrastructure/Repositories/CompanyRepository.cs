@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class CompanyRepository(IAppDbContext dbContext)
+public class CompanyRepository(IAppDbContext dbContext) : ICompanyRepository
 {
     private readonly IAppDbContext _appDbContext = dbContext;
 
@@ -33,14 +33,15 @@ public class CompanyRepository(IAppDbContext dbContext)
         };
     }
 
-    public async Task<Company?> GetCompany(long companyId, CancellationToken ct)
+    public async Task<Company?> GetCompanyById(long? companyId, CancellationToken ct)
     {
         var company = await _appDbContext.Companies.FindAsync([companyId, ct], cancellationToken: ct);
         return company;
     }
-
+    
     public async Task<List<CompanyDto>> GetCompanies(string? viewOrder, int pageNumber, int pageSize, CancellationToken ct)
     {
+        var companyList = await _appDbContext.Companies.ToListAsync(ct);
         IQueryable<Company> query = _appDbContext.Companies;
         query = viewOrder?.ToLower()switch
         {
@@ -48,11 +49,17 @@ public class CompanyRepository(IAppDbContext dbContext)
             _ => query.OrderBy(c => c.CreatedAt)
         };
 
+        if (pageNumber <= 0 )
+        {
+            pageNumber = 1;
+        }
+        
         var companies = await query
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .Select(c => new CompanyDto
             {
+                CompanyId = c.CompanyId,
                 CompanyAddress =  c.CompanyAddress,
                 CompanyEmail =  c.CompanyEmail,
                 IsActive = c.IsActive,
