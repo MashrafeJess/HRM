@@ -17,12 +17,11 @@ public class EmployeeDto : IRequest
     public string LastName { get; set; } = null!;
 
     public string Email { get; set; } = null!;
+    public string? Password { get; set; }   
 
     public string Phone { get; set; } = null!;
-
-    public string PasswordHash { get; set; } = null!;
-
-    public long RoleId { get; set; }
+    public long? RoleId { get; set; }
+    public string? RoleName { get; set; }
 
     public string? Gender { get; set; }
 

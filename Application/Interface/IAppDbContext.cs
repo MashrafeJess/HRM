@@ -9,5 +9,6 @@ public interface IAppDbContext
     DbSet<RefreshToken> RefreshTokens { get; }
     DbSet<Company> Companies { get; }
     DbSet<Department> Departments { get; }
+    DbSet<Role> Roles { get; }
     Task<int> SaveChangesAsync(CancellationToken ct);
 }

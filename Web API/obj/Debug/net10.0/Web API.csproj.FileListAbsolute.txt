@@ -170,3 +170,4 @@ C:\Users\iBOS\source\repos\HRM\Web API\bin\Debug\net10.0\zh-Hant\Microsoft.CodeA
 C:\Users\iBOS\source\repos\HRM\Web API\bin\Debug\net10.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\iBOS\source\repos\HRM\Web API\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\iBOS\source\repos\HRM\Web API\bin\Debug\net10.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\iBOS\source\repos\HRM\Web API\obj\Debug\net10.0\Web API.sourcelink.json

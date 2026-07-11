@@ -1,4 +1,5 @@
-﻿using Application.DTOs;
+﻿using Application.Common.Exceptions;
+using Application.DTOs;
 using Application.Interface;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,6 @@ public class EmployeeRepository(IAppDbContext appDbContext) : IEmployeeRepositor
             FirstName = employee.FirstName,
             LastName = employee.LastName,
             Email = employee.Email,
-            RoleId = employee.RoleId,
             DateOfBirth = employee.DateOfBirth,
             Gender = employee.Gender,
             CompanyId = employee.CompanyId,
@@ -45,5 +45,53 @@ public class EmployeeRepository(IAppDbContext appDbContext) : IEmployeeRepositor
         var id = await _appDbContext.Employees.OrderByDescending(x => x.EmployeeId).Select(s => s.EmployeeId)
             .FirstOrDefaultAsync();
         return id;
+    }
+
+    public async Task<Employee> GetEmployeeById(long id, CancellationToken ct)
+    {
+        var employee = await _appDbContext.Employees
+            .Include((e=>e.Role))
+            .Where(e=>e.EmployeeId==id).FirstOrDefaultAsync(ct);
+        return employee ?? throw new NotFoundException("Employee not found");
+    }
+
+    public async Task<List<EmployeeDto>> GetAllEmployeesByCompanyId(long companyId,string viewOrder, int pageNumber, int pageSize, CancellationToken ct)
+    {
+        var employees = _appDbContext.Employees
+            .AsNoTracking()
+            .Where(e => e.CompanyId == companyId);
+
+        employees = viewOrder.ToLower()switch
+        {
+            "desc" => employees.OrderByDescending(c => c.CreatedAt),
+            _ => employees.OrderBy(c => c.CreatedAt)
+        };
+        
+        if (pageNumber <= 0 )
+        {
+            pageNumber = 1;
+        }
+        
+        return await employees
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .Select(e=> new EmployeeDto
+            {
+                CompanyId = e.CompanyId,
+                DepartmentId = e.DepartmentId,
+                EmployeeCode = e.EmployeeCode,
+                FirstName = e.FirstName,
+                LastName = e.LastName,
+                Email = e.Email,
+                Phone = e.Phone,
+                RoleName = e.Role != null ? e.Role.RoleName : null,
+                Gender = e.Gender,
+                DateOfBirth = e.DateOfBirth,
+                JoinDate = e.JoinDate,
+                Salary = e.Salary,
+                Status = e.Status,
+                IsActive = e.IsActive
+            })
+            .ToListAsync(ct);
     }
 }

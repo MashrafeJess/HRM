@@ -9,7 +9,7 @@ public class GetCompaniesQueryHandler(ICompanyRepository repository) : IRequestH
     private readonly ICompanyRepository _repository = repository;
     public async Task<List<CompanyDto>> Handle(GetCompaniesQuery request, CancellationToken cancellationToken)
     {
-        var companies = await _repository.GetCompanies(request.ViewOrder, request.PageSize, request.PageNumber,
+        var companies = await _repository.GetCompanies(request.ViewOrder,request.PageNumber, request.PageSize,
             cancellationToken);
         return companies;
     }
