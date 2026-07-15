@@ -21,9 +21,9 @@ public class EmployeeController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("GetAllEmployeesByCompanyId/{companyId:long}")]
-    public async Task<IActionResult> GetAllEmployeeByCompanyId([FromRoute] long companyId,[FromQuery] PageFilterDto dto, CancellationToken ct)
+    public async Task<IActionResult> GetAllEmployeeByCompanyId([FromRoute] long companyId, [FromQuery] long? departmentId, [FromQuery] PageFilterDto dto, CancellationToken ct)
     {
-            var query = new GetAllEmployeeByCompanyIdQuery(companyId, dto.ViewOrder??"desc", dto.PageNumber??1, dto.PageSize??10);
+            var query = new GetAllEmployeeByCompanyIdQuery(companyId, departmentId, dto.ViewOrder??"desc", dto.PageNumber??1, dto.PageSize??10);
             var result = await _mediator.Send(query, ct);   
             return Ok(result);
     }

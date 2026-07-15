@@ -51,15 +51,15 @@ public class EmployeeRepository(IAppDbContext appDbContext) : IEmployeeRepositor
     {
         var employee = await _appDbContext.Employees
             .Include((e=>e.Role))
-            .Where(e=>e.EmployeeId==id).FirstOrDefaultAsync(ct);
+            .Where(e=>e.EmployeeId==id && e.IsActive == true).FirstOrDefaultAsync(ct);
         return employee ?? throw new NotFoundException("Employee not found");
     }
 
-    public async Task<List<EmployeeDto>> GetAllEmployeesByCompanyId(long companyId,string viewOrder, int pageNumber, int pageSize, CancellationToken ct)
+    public async Task<List<EmployeeDto>> GetAllEmployeesByCompanyId(long companyId, long? departmentId, string viewOrder, int pageNumber, int pageSize, CancellationToken ct)
     {
         var employees = _appDbContext.Employees
             .AsNoTracking()
-            .Where(e => e.CompanyId == companyId);
+            .Where(e => e.CompanyId == companyId && (departmentId == null || e.DepartmentId == departmentId) && e.IsActive == true);
 
         employees = viewOrder.ToLower()switch
         {

@@ -19,6 +19,7 @@ public class UpSertCommandHandler(IEmployeeRepository repository, IAuthRepositor
             {
                 
                 CreatedAt =  DateTime.Now,
+                CompanyId = request.Dto.CompanyId,
                 EmployeeCode = await GenerateEmployeeCode(),
                 DateOfBirth =  request.Dto.DateOfBirth,
                 Email = request.Dto.Email,      
