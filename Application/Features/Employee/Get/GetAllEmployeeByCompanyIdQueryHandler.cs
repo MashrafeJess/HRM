@@ -10,7 +10,7 @@ public class GetAllEmployeeByCompanyIdQueryHandler(IEmployeeRepository repositor
     public async Task<List<EmployeeDto>> Handle(GetAllEmployeeByCompanyIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _employeeRepository
-            .GetAllEmployeesByCompanyId(request.CompanyId, request.ViewOrder,request.PageNumber, request.PageSize, cancellationToken);
+            .GetAllEmployeesByCompanyId(request.CompanyId, request.DepartmentId, request.ViewOrder,request.PageNumber, request.PageSize, cancellationToken);
         return result;
     }
 }
