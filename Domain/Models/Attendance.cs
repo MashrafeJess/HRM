@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Domain.Models;
+﻿namespace Domain.Models;
 
 public partial class Attendance
 {
@@ -19,9 +16,9 @@ public partial class Attendance
 
     public decimal? WorkingHours { get; set; }
 
-    public int? LateMinutes { get; set; }
+    public TimeOnly? LateMinutes { get; set; }
 
-    public int? EarlyLeaveMinutes { get; set; }
+    public TimeOnly? EarlyLeaveMinutes { get; set; }
 
     public string? Status { get; set; }
 

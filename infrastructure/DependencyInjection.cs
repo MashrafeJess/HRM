@@ -1,5 +1,5 @@
 ﻿using Application.Interface;
-using Domain;
+using Infrastructure.DbContexts;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -21,12 +21,15 @@ public static class DependencyInjection
         
         // ✅ Contexts
         services.AddScoped<IAppDbContext, AppDbContext>();
+        
         // ✅ Repositories
         services.AddScoped<IAuthRepository, AuthRepository>();
         services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
         services.AddScoped<ICompanyRepository, CompanyRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IAttendanceRepository, AttendanceRepository>();
+        services.AddScoped<ILeaveRepository, LeaveRepository>();
 
         // ✅ Services
         services.AddScoped<ITokenService, TokenService>();

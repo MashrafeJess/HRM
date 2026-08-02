@@ -1,17 +1,18 @@
-﻿using Application.DTOs;
+﻿using Application.Common.Exceptions;
+using Application.DTOs;
 using Application.Interface;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories;
 
-public class AttendanceRepository(IAppDbContext context)
+public class AttendanceRepository(IAppDbContext context) : IAttendanceRepository
 {
     private readonly IAppDbContext _context = context;
 
     public async Task<Attendance?> CreateOrUpdateAttendance(Attendance attendance, CancellationToken ct)
     {
-        var existingAttendance = await _context.Attendances.FindAsync([attendance.AttendanceId, ct], ct);
+        var existingAttendance = await _context.Attendances.FindAsync([attendance.AttendanceId], ct);
         
         if (existingAttendance is null)
         {
@@ -21,6 +22,7 @@ public class AttendanceRepository(IAppDbContext context)
         {
             _context.Attendances.Update(attendance);
         }
+        await _context.SaveChangesAsync(ct);
         return existingAttendance;
     }
 
@@ -30,11 +32,12 @@ public class AttendanceRepository(IAppDbContext context)
         return attendanceList;
     }
 
-    public async Task<List<Attendance>> GetAttendanceByDate(DateOnly date, CancellationToken ct)
+    public async Task<List<Attendance>> GetAttendanceByDate(long companyId, DateOnly date, CancellationToken ct)
     {
-        var attendanceList = await _context.Attendances.Where(e=>e.AttendanceDate == date).ToListAsync(ct);
+        var attendanceList = await _context.Attendances.Where(e=>e.CompanyId == companyId && e.AttendanceDate == date).ToListAsync(ct);
         return attendanceList;
     }
+    
     public async Task<AttendanceStatisticsDto> GetAttendancesStatisticsByEmployeeId(long employeeId,long monthId, long yearId, CancellationToken ct)
     {
         var attendanceList = await _context.Attendances
@@ -50,7 +53,7 @@ public class AttendanceRepository(IAppDbContext context)
                 string.Equals(a.Status, "Present", StringComparison.OrdinalIgnoreCase)),
             LateDays = attendanceList.Count(a =>
                 string.Equals(a.Status, "Late", StringComparison.OrdinalIgnoreCase) ||
-                (a.LateMinutes ?? 0) > 0),
+                (a.LateMinutes ?? null) >  new TimeOnly(0,0)),
             LeaveDays = attendanceList.Count(a =>
                 string.Equals(a.Status, "Leave", StringComparison.OrdinalIgnoreCase)),
             AttendanceRatio = 0
@@ -72,8 +75,11 @@ public class AttendanceRepository(IAppDbContext context)
                                                                       a.AttendanceDate.Year == yearId && a.AttendanceDate.Month == monthId).ToListAsync(ct);
             var totalDays = attendanceList.Count;
             
-            var totalPresents = attendanceList.Count(a =>a.Status == "Present"); 
-            var totalLate = attendanceList.Count(a =>a.Status == "Late");
+            var totalPresents = attendanceList.Count(a =>
+                string.Equals(a.Status, "Present", StringComparison.OrdinalIgnoreCase));
+            var totalLate = attendanceList.Count(a =>
+                string.Equals(a.Status, "Late", StringComparison.OrdinalIgnoreCase) ||
+                (a.LateMinutes.HasValue && a.LateMinutes.Value > TimeOnly.MinValue));
             
             var averageAttendanceRate = totalDays == 0 ? 0 :  (long)Math.Round((double)(totalPresents * 100) / totalDays);
             
@@ -110,10 +116,17 @@ public class AttendanceRepository(IAppDbContext context)
                                                 g.Key.DepartmentId,
                                                 g.Key.DepartmentName,
                                                 TotalRecords = g.Count(),
-                                                lateCount = g.Count(x=>x.Status == "Late"),
-                                                LateRate = g.Average(x=>x.LateMinutes),
+                                                LateCount = g.Count(x =>
+                                                    string.Equals(x.Status, "Late", StringComparison.OrdinalIgnoreCase) ||
+                                                    (x.LateMinutes.HasValue && x.LateMinutes.Value > TimeOnly.MinValue)),
+                                                LateRate = !g.Any()
+                                                    ? 0m
+                                                    : Math.Round(g.Count(x =>
+                                                        string.Equals(x.Status, "Late", StringComparison.OrdinalIgnoreCase) ||
+                                                        (x.LateMinutes.HasValue && x.LateMinutes.Value > TimeOnly.MinValue)) * 100m / g.Count(), 2),
+                                                
                                             })
-                .OrderByDescending(e => e.LateRate)
+                .OrderBy(e => e.LateRate)
                 .ToList();
             
             var punctualDepartment = departmentPunctuality.FirstOrDefault();
@@ -127,7 +140,7 @@ public class AttendanceRepository(IAppDbContext context)
                 })
                 .OrderByDescending(g => g.AbsentCount)
                 .FirstOrDefault();
-            var absenteeEmployee = employeeList.FirstOrDefault(e => e.EmployeeId == highestAbsentNigga!.EmployeeId);
+            var absenteeEmployee = highestAbsentNigga is null ? null :  employeeList.FirstOrDefault(e => e.EmployeeId == highestAbsentNigga.EmployeeId);
 
             var result = new AttendanceSummaryDto
             {
@@ -137,6 +150,7 @@ public class AttendanceRepository(IAppDbContext context)
                 EmployeeList = employeesWithPerfectAttendance,
                 MostPunctualDepartmentId = punctualDepartment?.DepartmentId,
                 MostPunctualDepartmentName = punctualDepartment?.DepartmentName,
+                LateRate = punctualDepartment?.LateRate,
                 HighestAbsenteeId = highestAbsentNigga?.EmployeeId,
                 HighestAbsenteeName = absenteeEmployee?.FirstName,
             };
@@ -148,10 +162,10 @@ public class AttendanceRepository(IAppDbContext context)
         }
     }
 
-    public async Task<AttendanceSummaryForADayDto> GetAttendanceSummaryForADay(long companyId, long dayId, CancellationToken ct )
+    public async Task<AttendanceSummaryForADayDto> GetAttendanceSummaryForADay(long companyId, DateOnly date, CancellationToken ct )
     {
         var attendanceList = await _context.Attendances
-            .Where(a => a.CompanyId == companyId && a.AttendanceDate.Day == dayId)
+            .Where(a => a.CompanyId == companyId && a.AttendanceDate == date)
             .ToListAsync(ct);
 
         var totalEmployees = await _context.Employees
@@ -183,6 +197,43 @@ public class AttendanceRepository(IAppDbContext context)
             TotalAbsent = totalAbsent,
             TotalAbsentArrival = totalAbsentArrival
         };
+    }
+
+    public async Task<Attendance> GetAttendanceById(long? attendanceId, CancellationToken ct)
+    {
+        try
+        {
+            var attendance = await _context.Attendances.Where(a => a.AttendanceId == attendanceId)
+                .FirstOrDefaultAsync(ct);
+            
+            return attendance ?? throw new NotFoundException("This attendance does not exist"); 
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+    public async Task MarkAbsentEmployeeAsync(DateOnly date, CancellationToken ct)
+    {
+        await _context.Database.ExecuteSqlInterpolatedAsync(
+            $"EXEC dbo.sp_MarkAbsentEmployees @AttendanceDate = {date}", ct
+        );
+    }
+
+    public async Task<List<Attendance>> GetAttendanceOnCertainRange(long employeeId, DateOnly fromDate, DateOnly toDate, CancellationToken ct)
+    {
+        try
+        {
+            var attendanceList = _context.Attendances.Where(a => a.EmployeeId == employeeId && 
+                                                                 a.AttendanceDate >= fromDate && a.AttendanceDate <= toDate).ToListAsync(ct);
+
+            return await attendanceList;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("Leave Request Status couldn't be updated", ex);
+        }
     }
     
 }

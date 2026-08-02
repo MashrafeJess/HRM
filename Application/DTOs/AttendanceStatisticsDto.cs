@@ -24,6 +24,7 @@ public class AttendanceSummaryDto
     public List<PerfectAttendanceEmployeeSummaryDto>? EmployeeList { get; set; } 
     public long? MostPunctualDepartmentId { get; set; }
     public string? MostPunctualDepartmentName { get; set; }
+    public decimal? LateRate { get; set; }
     public long? HighestAbsenteeId { get; set; }
     public string? HighestAbsenteeName { get; set; }
 }
