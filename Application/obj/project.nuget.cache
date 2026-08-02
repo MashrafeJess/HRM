@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "kcUo3Do36yw=",
+  "dgSpecHash": "0/y1uv/gcbA=",
   "success": true,
   "projectFilePath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
   "expectedPackageFiles": [
@@ -75,7 +75,79 @@
     {
       "code": "NU1903",
       "level": "Warning",
+      "message": "Package 'System.Security.Cryptography.Xml' 8.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-23rf-6693-g89p",
+      "projectPath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
+      "libraryId": "System.Security.Cryptography.Xml",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
       "message": "Package 'System.Security.Cryptography.Xml' 8.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-37gx-xxp4-5rgx",
+      "projectPath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
+      "libraryId": "System.Security.Cryptography.Xml",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'System.Security.Cryptography.Xml' 8.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-6588-8gv4-xfgh",
+      "projectPath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
+      "libraryId": "System.Security.Cryptography.Xml",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'System.Security.Cryptography.Xml' 8.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-8q5v-6pqq-x66h",
+      "projectPath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
+      "libraryId": "System.Security.Cryptography.Xml",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'System.Security.Cryptography.Xml' 8.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-cvvh-rhrc-wg4q",
+      "projectPath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
+      "libraryId": "System.Security.Cryptography.Xml",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'System.Security.Cryptography.Xml' 8.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-g8r8-53c2-pm3f",
+      "projectPath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
+      "warningLevel": 1,
+      "filePath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
+      "libraryId": "System.Security.Cryptography.Xml",
+      "targetGraphs": [
+        "net10.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "message": "Package 'System.Security.Cryptography.Xml' 8.0.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-mmjf-rqrv-855v",
       "projectPath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",
       "warningLevel": 1,
       "filePath": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Application.csproj",

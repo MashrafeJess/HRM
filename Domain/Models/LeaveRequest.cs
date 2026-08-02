@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Domain.Models;
+﻿namespace Domain.Models;
 
 public partial class LeaveRequest
 {
@@ -32,4 +29,5 @@ public partial class LeaveRequest
     public string? Ainotes { get; set; }
 
     public DateTime? CreatedAt { get; set; }
+
 }

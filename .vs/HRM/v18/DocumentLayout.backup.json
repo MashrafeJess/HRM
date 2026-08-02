@@ -95,12 +95,12 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Web API",
+              "Title": "Web API.csproj",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Web API\\Web API.csproj",
               "RelativeDocumentMoniker": "Web API\\Web API.csproj",
               "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Web API\\Web API.csproj",
               "RelativeToolTip": "Web API\\Web API.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
               "WhenOpened": "2026-07-06T04:46:01.342Z",
               "EditorCaption": ""
@@ -283,8 +283,7 @@
               "RelativeToolTip": "Domain\\Interface\\ITokenService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAuwAcAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-05T16:11:33.421Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-07-05T16:11:33.421Z"
             },
             {
               "$type": "Document",

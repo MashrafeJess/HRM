@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using Application.Interface;
 using Domain.Models;
+using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
-namespace Domain;
+namespace Infrastructure.DbContexts;
 
 public partial class AppDbContext : DbContext, IAppDbContext
 {

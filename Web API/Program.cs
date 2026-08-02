@@ -1,5 +1,6 @@
 using Application;
 using Infrastructure;
+using Web_API.Jobs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,8 @@ builder.Services.AddSwaggerGen();
 //Add Infrastructure
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
+builder.Services.AddScoped<MarkAbsentJob>();
+builder.Services.AddHostedService<MarkAbsentBackgroundService>();
 
 builder.Services.AddHttpContextAccessor();
 
