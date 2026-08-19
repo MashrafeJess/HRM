@@ -8,7 +8,7 @@ public partial class Payroll
 
     public long EmployeeId { get; set; }
 
-    public string Month { get; set; } = null!;
+    public long Month { get; set; }
 
     public long Year { get; set; }
 

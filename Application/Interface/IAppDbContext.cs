@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Employee = Domain.Models.Employee;
+using LeaveRequest = Domain.Models.LeaveRequest;
 using Role = Domain.Models.Role;
 
 namespace Application.Interface;

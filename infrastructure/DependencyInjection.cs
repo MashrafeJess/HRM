@@ -30,10 +30,12 @@ public static class DependencyInjection
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IAttendanceRepository, AttendanceRepository>();
         services.AddScoped<ILeaveRepository, LeaveRepository>();
+        services.AddScoped<IPayrollRepository, PayrollRepository>();
 
         // ✅ Services
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IPasswordService, PasswordService>();
+        services.AddScoped<IPayrollService, PayrollCalculateService>();
 
         return services;
     }
