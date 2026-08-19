@@ -16,7 +16,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
 builder.Services.AddScoped<MarkAbsentJob>();
+builder.Services.AddScoped<GeneratePayrollJob>();
 builder.Services.AddHostedService<MarkAbsentBackgroundService>();
+builder.Services.AddHostedService<GeneratePayrollPerMonthBackgroundJob>();
 
 builder.Services.AddHttpContextAccessor();
 

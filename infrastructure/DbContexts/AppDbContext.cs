@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Application.Interface;
+﻿using Application.Interface;
 using Domain.Models;
-using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.DbContexts;
@@ -171,7 +168,6 @@ public partial class AppDbContext : DbContext, IAppDbContext
             entity.Property(e => e.BasicSalary).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.GeneratedAt).HasColumnType("datetime");
             entity.Property(e => e.LateDeduction).HasColumnType("decimal(18, 0)");
-            entity.Property(e => e.Month).HasMaxLength(20);
             entity.Property(e => e.NetSalary).HasColumnType("decimal(18, 0)");
         });
 
