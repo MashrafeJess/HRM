@@ -2,9 +2,12 @@
 using Infrastructure.DbContexts;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Infrastructure;
 
@@ -36,6 +39,27 @@ public static class DependencyInjection
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IPasswordService, PasswordService>();
         services.AddScoped<IPayrollService, PayrollCalculateService>();
+
+        // ✅ Authentication
+        var jwt = config.GetSection("JwtSettings");
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = jwt["Issuer"],
+                    ValidateAudience = true,
+                    ValidAudience = jwt["Audience"],
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(jwt["SecretKey"] ?? throw new InvalidOperationException("JwtSettings:SecretKey is missing."))),
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+            });
+
+        services.AddAuthorization();
 
         return services;
     }
