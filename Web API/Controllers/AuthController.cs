@@ -16,9 +16,7 @@ namespace Web_API.Controllers
         private readonly IMediator _mediator = mediator;
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<IActionResult> Login(
-            [FromBody] LoginDto dto,
-            CancellationToken ct)
+        public async Task<IActionResult> Login([FromBody] LoginDto dto,CancellationToken ct)
         {
             var result = await _mediator.Send(
                 new LoginCommand(dto.Email, dto.Password), ct);
@@ -33,7 +31,13 @@ namespace Web_API.Controllers
                 Expires = DateTime.UtcNow.AddDays(7)
             });
 
-            return Ok(new { result.AccessToken });
+            return Ok(new
+            {
+                result.AccessToken,
+                result.EmployeeId,
+                result.CompanyId,
+                result.DepartmentId
+            });
         }
         
         [HttpPost("refresh")]
@@ -53,7 +57,13 @@ namespace Web_API.Controllers
                 Expires = DateTime.UtcNow.AddDays(7)
             });
 
-            return Ok(new { result.AccessToken });
+            return Ok(new
+            {
+                result.AccessToken,
+                result.EmployeeId,
+                result.CompanyId,
+                result.DepartmentId
+            });
         }
 
         [HttpPost("logout")]

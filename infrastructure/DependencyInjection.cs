@@ -45,6 +45,10 @@ public static class DependencyInjection
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
+                // Keep claim types exactly as issued (e.g. "Name", "Role") instead of
+                // letting the default inbound map rewrite short names back to
+                // ClaimTypes.* URIs (http://schemas.xmlsoap.org/...).
+                options.MapInboundClaims = false;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -55,7 +59,12 @@ public static class DependencyInjection
                     IssuerSigningKey = new SymmetricSecurityKey(
                         Encoding.UTF8.GetBytes(jwt["SecretKey"] ?? throw new InvalidOperationException("JwtSettings:SecretKey is missing."))),
                     ValidateLifetime = true,
-                    ClockSkew = TimeSpan.Zero
+                    ClockSkew = TimeSpan.Zero,
+                    // Our tokens carry the role under the plain "Role" claim type
+                    // (see TokenService.GenerateAccessToken), not ClaimTypes.Role,
+                    // so [Authorize(Roles = "...")] needs to know to look there.
+                    RoleClaimType = "Role",
+                    NameClaimType = "Name"
                 };
             });
 

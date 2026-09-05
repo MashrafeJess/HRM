@@ -31,12 +31,25 @@ public class DepartmentRepository(IAppDbContext context) : IDepartmentRepository
         }
     }
 
-    public async Task<List<Department>> GetAllDepartments(long companyId, CancellationToken cancellationToken)
+    public async Task<(List<Department> Departments, int TotalCount)> GetAllDepartments(long companyId, string? viewOrder, int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
         try
         {
-            var departments = await _context.Departments.Where(d => d.CompanyId == companyId).ToListAsync(cancellationToken);
-            return departments;
+            var query = _context.Departments.Where(d => d.CompanyId == companyId);
+            query = viewOrder?.ToLower() switch
+            {
+                "desc" => query.OrderByDescending(d => d.CreatedAt),
+                _ => query.OrderBy(d => d.CreatedAt)
+            };
+
+            var totalCount = await query.CountAsync(cancellationToken);
+
+            var departments = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync(cancellationToken);
+
+            return (departments, totalCount);
         }
         catch (Exception e)
         {

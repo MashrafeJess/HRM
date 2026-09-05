@@ -41,6 +41,6 @@ public class RefreshCommandHandler(
         await _authRepository.AddRefreshTokenAsync(newRefreshToken, cancellationToken);
         await _authRepository.SaveChangesAsync(cancellationToken);
 
-        return new AuthResponseDto(newAccessToken, newRawRefresh);
+        return new AuthResponseDto(newAccessToken, newRawRefresh, null,null, null);
     }
 }

@@ -1,7 +1,10 @@
-﻿using Application.Features.Company.CreateOrUpdate;
+﻿using Application.Common;
+using Application.DTOs;
+using Application.Features.Company.CreateOrUpdate;
 using Application.Features.Company.Get;
 using Application.Features.Company.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web_API.Controllers;
@@ -11,6 +14,7 @@ namespace Web_API.Controllers;
 public class CompanyController(IMediator mediator) : ControllerBase
 {
     [HttpPost("EditCompany")]
+    [Authorize(Roles = "Super Admin, Company Admin")]
     public async Task<IActionResult> Handle(CreateOrUpdateCompanyUpSertCommand request,
         CancellationToken cancellationToken)
     {
@@ -19,13 +23,17 @@ public class CompanyController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("GetAllCompany")]
-    public async Task<IActionResult> GetCompanies([FromQuery] GetCompaniesQuery query, CancellationToken ct)
+    [Authorize(Roles = "Super Admin")]
+    public async Task<IActionResult> GetCompanies([FromQuery] PageFilterDto dto, CancellationToken ct)
     {
-        var result =  await mediator.Send(query, ct);
+        var (pageNumber, pageSize) = PaginationDefaults.Normalize(dto.PageNumber, dto.PageSize);
+        var query = new GetCompaniesQuery(dto.ViewOrder, pageNumber, pageSize);
+        var result = await mediator.Send(query, ct);
         return Ok(result);
     }
 
     [HttpGet("GetCompanyById/{companyId:long}")]
+    [Authorize(Roles = "Super Admin")]
     public async Task<IActionResult> GetCompanyById(long companyId, CancellationToken ct)
     {
         var query = new GetCompanyByIdQuery(companyId);

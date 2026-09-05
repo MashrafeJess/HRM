@@ -55,7 +55,7 @@ public class EmployeeRepository(IAppDbContext appDbContext) : IEmployeeRepositor
         return employee ?? throw new NotFoundException("Employee not found");
     }
 
-    public async Task<List<EmployeeDto>> GetAllEmployeesByCompanyId(long companyId, long? departmentId, string viewOrder, int pageNumber, int pageSize, CancellationToken ct)
+    public async Task<PagedResult<EmployeeDto>> GetAllEmployeesByCompanyId(long companyId, long? departmentId, string viewOrder, int pageNumber, int pageSize, CancellationToken ct)
     {
         var employees = _appDbContext.Employees
             .AsNoTracking()
@@ -66,13 +66,10 @@ public class EmployeeRepository(IAppDbContext appDbContext) : IEmployeeRepositor
             "desc" => employees.OrderByDescending(c => c.CreatedAt),
             _ => employees.OrderBy(c => c.CreatedAt)
         };
-        
-        if (pageNumber <= 0 )
-        {
-            pageNumber = 1;
-        }
-        
-        return await employees
+
+        var totalCount = await employees.CountAsync(ct);
+
+        var items = await employees
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .Select(e=> new EmployeeDto
@@ -93,5 +90,13 @@ public class EmployeeRepository(IAppDbContext appDbContext) : IEmployeeRepositor
                 IsActive = e.IsActive
             })
             .ToListAsync(ct);
+
+        return new PagedResult<EmployeeDto>
+        {
+            Items = items,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            TotalCount = totalCount
+        };
     }
 }

@@ -4,6 +4,7 @@ using Application.Features.LeaveRequest.GetByStatus;
 using Application.Features.LeaveRequest.GetHistory;
 using Application.Features.Attendance.UpdateOnLeaveRequest;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web_API.Controllers;
@@ -14,6 +15,7 @@ public class LeaveController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
     [HttpPost("AddLeaveRequest")]
+    [Authorize(Roles = "Common")]
     public async Task<IActionResult> AddLeaveRequest(LeaveRequestUpSertCommand command, CancellationToken ct)
     {
         var result = await _mediator.Send(command, ct);
@@ -21,6 +23,7 @@ public class LeaveController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("GetLeaveRequestByEmployeeId")]
+    [Authorize(Roles = "Company Admin,Common")]
     public async Task<IActionResult> GetLeaveRequestByEmployeeId([FromQuery] long employeeId, CancellationToken ct)
     {
         var result = await _mediator.Send(new GetLeaveRequestByEmployeeIdQuery(employeeId, ct), ct);
@@ -28,6 +31,7 @@ public class LeaveController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("GetLeaveRequestByStatus")]
+    [Authorize(Roles = "Company Admin,Common")]
     public async Task<IActionResult> GetLeaveRequestByStatus([FromQuery] GetLeaveRequestByStatusQuery request, CancellationToken ct)
     {
         var result = await _mediator.Send(request, ct);
@@ -35,6 +39,7 @@ public class LeaveController(IMediator mediator) : ControllerBase
     }
     
     [HttpGet("GetEmployeeLeaveRequestsByEmployeeId")]
+    [Authorize(Roles = "Company Admin")]
     public async Task<IActionResult> GetEmployeeLeaveRequestsByEmployeeId([FromQuery] GetEmployeeLeaveRequestsByEmployeeIdQuery request, CancellationToken ct)
     {
         var result = await _mediator.Send(request, ct);
@@ -42,6 +47,7 @@ public class LeaveController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost("UpdateLeaveRequestStatus")]
+    [Authorize(Roles = "Company Admin")]
     public async Task<IActionResult> UpdateLeaveRequestStatus(
         [FromBody] UpdateLeaveRequestStatusCommand command,
         CancellationToken ct)
