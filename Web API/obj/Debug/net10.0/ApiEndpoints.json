@@ -1,0 +1,527 @@
+[
+  {
+    "ContainingType": "Web_API.Controllers.AttendanceController",
+    "Method": "CheckIn_CheckOut",
+    "RelativePath": "api/Attendance/CheckIn\u0026CheckOut",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Application.Features.Attendance.CheckIn_CheckOut.CheckInCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.AttendanceController",
+    "Method": "CheckIn",
+    "RelativePath": "api/Attendance/GetAttendanceByDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CompanyId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Date",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.AttendanceController",
+    "Method": "CheckIn",
+    "RelativePath": "api/Attendance/GetAttendanceByEmployeeId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EmployeeId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.AttendanceController",
+    "Method": "CheckIn",
+    "RelativePath": "api/Attendance/GetAttendancesStatisticsByEmployeeId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EmployeeId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "MonthId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "YearId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.AttendanceController",
+    "Method": "CheckIn",
+    "RelativePath": "api/Attendance/GetAttendanceSummaryForADay",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CompanyId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Date",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.AttendanceController",
+    "Method": "CheckIn",
+    "RelativePath": "api/Attendance/GetAttendanceSummaryForMonth",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CompanyId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "MonthId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "YearId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Application.DTOs.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.AuthController",
+    "Method": "Logout",
+    "RelativePath": "api/Auth/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.AuthController",
+    "Method": "Refresh",
+    "RelativePath": "api/Auth/refresh",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.CompanyController",
+    "Method": "Handle",
+    "RelativePath": "api/Company/EditCompany",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.Features.Company.CreateOrUpdate.CreateOrUpdateCompanyUpSertCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.CompanyController",
+    "Method": "GetCompanies",
+    "RelativePath": "api/Company/GetAllCompany",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ViewOrder",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.CompanyController",
+    "Method": "GetCompanyById",
+    "RelativePath": "api/Company/GetCompanyById/{companyId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.DepartmentController",
+    "Method": "GetDepartments",
+    "RelativePath": "api/Department/AllDepartmentsByCompanyId/{companyId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.DepartmentController",
+    "Method": "CreateDepartment",
+    "RelativePath": "api/Department/EditDepartment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Application.Features.Department.CreateOrUpdate.UpsertDepartmentCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Application.DTOs.DepartmentDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Web_API.Controllers.DepartmentController",
+    "Method": "GetDepartmentById",
+    "RelativePath": "api/Department/GetDepartmentById{departmentId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departmentId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.EmployeeController",
+    "Method": "EditEmployee",
+    "RelativePath": "api/Employee/AddOrUpdateEmployee",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Application.Features.Employee.CreateOrUpdate.CreateOrUpdateUpSertCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.EmployeeController",
+    "Method": "GetAllEmployeeByCompanyId",
+    "RelativePath": "api/Employee/GetAllEmployeesByCompanyId/{companyId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      },
+      {
+        "Name": "departmentId",
+        "Type": "System.Nullable\u00601[[System.Int64, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "ViewOrder",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageNumber",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.EmployeeController",
+    "Method": "GetEmployeeById",
+    "RelativePath": "api/Employee/GetEmployeeById/{employeeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.LeaveController",
+    "Method": "AddLeaveRequest",
+    "RelativePath": "api/Leave/AddLeaveRequest",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Application.Features.LeaveRequest.LeaveRequestUpSertCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.LeaveController",
+    "Method": "GetEmployeeLeaveRequestsByEmployeeId",
+    "RelativePath": "api/Leave/GetEmployeeLeaveRequestsByEmployeeId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "EmployeeId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.LeaveController",
+    "Method": "GetLeaveRequestByEmployeeId",
+    "RelativePath": "api/Leave/GetLeaveRequestByEmployeeId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.LeaveController",
+    "Method": "GetLeaveRequestByStatus",
+    "RelativePath": "api/Leave/GetLeaveRequestByStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "Application.Common.Enums.LeaveRequestStatusEnum",
+        "IsRequired": false
+      },
+      {
+        "Name": "CompanyId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.LeaveController",
+    "Method": "UpdateLeaveRequestStatus",
+    "RelativePath": "api/Leave/UpdateLeaveRequestStatus",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Application.Features.Attendance.UpdateOnLeaveRequest.UpdateLeaveRequestStatusCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.PayrollController",
+    "Method": "GetPayRollForCompany",
+    "RelativePath": "api/Payroll/GetPayRollForCompany",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "companyId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "monthId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.PayrollController",
+    "Method": "GetPayRollForEmployee",
+    "RelativePath": "api/Payroll/GetPayRollForEmployee",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "employeeId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "yearId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "monthId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.RoleController",
+    "Method": "EditRole",
+    "RelativePath": "api/Role/AddOrUpdateRole",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Application.Features.Role.Upsert.EditRoleCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.RoleController",
+    "Method": "GetAllRoles",
+    "RelativePath": "api/Role/GetAllRoles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Web_API.Controllers.RoleController",
+    "Method": "GetEmployeeById",
+    "RelativePath": "api/Role/GetRoleById/{roleId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roleId",
+        "Type": "System.Int64",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

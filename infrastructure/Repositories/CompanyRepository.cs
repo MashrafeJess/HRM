@@ -39,9 +39,8 @@ public class CompanyRepository(IAppDbContext dbContext) : ICompanyRepository
         return company;
     }
     
-    public async Task<List<CompanyDto>> GetCompanies(string? viewOrder, int pageNumber, int pageSize, CancellationToken ct)
+    public async Task<PagedResult<CompanyDto>> GetCompanies(string? viewOrder, int pageNumber, int pageSize, CancellationToken ct)
     {
-        var companyList = await _appDbContext.Companies.ToListAsync(ct);
         IQueryable<Company> query = _appDbContext.Companies;
         query = viewOrder?.ToLower()switch
         {
@@ -49,11 +48,8 @@ public class CompanyRepository(IAppDbContext dbContext) : ICompanyRepository
             _ => query.OrderBy(c => c.CreatedAt)
         };
 
-        if (pageNumber <= 0 )
-        {
-            pageNumber = 1;
-        }
-        
+        var totalCount = await query.CountAsync(ct);
+
         var companies = await query
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
@@ -69,7 +65,14 @@ public class CompanyRepository(IAppDbContext dbContext) : ICompanyRepository
                 CompanyPhone =  c.CompanyPhone,
             })
             .ToListAsync(ct);
-        return companies;
+
+        return new PagedResult<CompanyDto>
+        {
+            Items = companies,
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            TotalCount = totalCount
+        };
     }
 
     public async Task<Company?> GetCompanyById(long companyId, CancellationToken ct)

@@ -2,6 +2,7 @@
 using Application.Features.Role.GetById;
 using Application.Features.Role.Upsert;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web_API.Controllers;
@@ -12,6 +13,7 @@ public class RoleController(IMediator mediator) : ControllerBase
 {
    private readonly IMediator _mediator = mediator;
    [HttpPost("AddOrUpdateRole")]
+   [Authorize(Roles = "Super Admin")]
    public async Task<IActionResult> EditRole(EditRoleCommand command, CancellationToken ct)
    {
       var result = await _mediator.Send(command, ct);
@@ -19,6 +21,7 @@ public class RoleController(IMediator mediator) : ControllerBase
    }
 
    [HttpGet("GetAllRoles")]
+   [Authorize(Roles = "Super Admin")]
    public async Task<IActionResult> GetAllRoles(CancellationToken ct)
    {
       var result = await _mediator.Send(new GetRoleQuery(), ct);
@@ -26,6 +29,7 @@ public class RoleController(IMediator mediator) : ControllerBase
    }
 
    [HttpGet("GetRoleById/{roleId:long}")]
+   [Authorize(Roles = "Super Admin")]
    public async Task<IActionResult> GetEmployeeById( long roleId, CancellationToken ct)
    {
       var query = new GetRoleByIdQuery(roleId);

@@ -1,0 +1,1321 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Web API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Attendance/CheckIn&CheckOut": {
+      "post": {
+        "tags": [
+          "Attendance"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckInCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckInCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CheckInCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Attendance/GetAttendanceByDate": {
+      "get": {
+        "tags": [
+          "Attendance"
+        ],
+        "parameters": [
+          {
+            "name": "CompanyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Attendance/GetAttendanceByEmployeeId": {
+      "get": {
+        "tags": [
+          "Attendance"
+        ],
+        "parameters": [
+          {
+            "name": "EmployeeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Attendance/GetAttendancesStatisticsByEmployeeId": {
+      "get": {
+        "tags": [
+          "Attendance"
+        ],
+        "parameters": [
+          {
+            "name": "EmployeeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "MonthId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "YearId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Attendance/GetAttendanceSummaryForMonth": {
+      "get": {
+        "tags": [
+          "Attendance"
+        ],
+        "parameters": [
+          {
+            "name": "CompanyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "MonthId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "YearId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Attendance/GetAttendanceSummaryForADay": {
+      "get": {
+        "tags": [
+          "Attendance"
+        ],
+        "parameters": [
+          {
+            "name": "CompanyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Company/EditCompany": {
+      "post": {
+        "tags": [
+          "Company"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateCompanyUpSertCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateCompanyUpSertCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateCompanyUpSertCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Company/GetAllCompany": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "parameters": [
+          {
+            "name": "ViewOrder",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Company/GetCompanyById/{companyId}": {
+      "get": {
+        "tags": [
+          "Company"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Department/EditDepartment": {
+      "post": {
+        "tags": [
+          "Department"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertDepartmentCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertDepartmentCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpsertDepartmentCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartmentDto"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartmentDto"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DepartmentDto"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Department/AllDepartmentsByCompanyId/{companyId}": {
+      "get": {
+        "tags": [
+          "Department"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Department/GetDepartmentById{departmentId}": {
+      "get": {
+        "tags": [
+          "Department"
+        ],
+        "parameters": [
+          {
+            "name": "departmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Employee/AddOrUpdateEmployee": {
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateUpSertCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateUpSertCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateOrUpdateUpSertCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Employee/GetAllEmployeesByCompanyId/{companyId}": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "departmentId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "ViewOrder",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Employee/GetEmployeeById/{employeeId}": {
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Leave/AddLeaveRequest": {
+      "post": {
+        "tags": [
+          "Leave"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveRequestUpSertCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveRequestUpSertCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LeaveRequestUpSertCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Leave/GetLeaveRequestByEmployeeId": {
+      "get": {
+        "tags": [
+          "Leave"
+        ],
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Leave/GetLeaveRequestByStatus": {
+      "get": {
+        "tags": [
+          "Leave"
+        ],
+        "parameters": [
+          {
+            "name": "Id",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/LeaveRequestStatusEnum"
+            }
+          },
+          {
+            "name": "CompanyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Leave/GetEmployeeLeaveRequestsByEmployeeId": {
+      "get": {
+        "tags": [
+          "Leave"
+        ],
+        "parameters": [
+          {
+            "name": "EmployeeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Leave/UpdateLeaveRequestStatus": {
+      "post": {
+        "tags": [
+          "Leave"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLeaveRequestStatusCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLeaveRequestStatusCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLeaveRequestStatusCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Payroll/GetPayRollForEmployee": {
+      "get": {
+        "tags": [
+          "Payroll"
+        ],
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "yearId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "monthId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Payroll/GetPayRollForCompany": {
+      "get": {
+        "tags": [
+          "Payroll"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "yearId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "monthId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Role/AddOrUpdateRole": {
+      "post": {
+        "tags": [
+          "Role"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditRoleCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditRoleCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditRoleCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Role/GetAllRoles": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Role/GetRoleById/{roleId}": {
+      "get": {
+        "tags": [
+          "Role"
+        ],
+        "parameters": [
+          {
+            "name": "roleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AttendanceDto": {
+        "type": "object",
+        "properties": {
+          "attendanceId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "employeeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "attendanceDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "checkIn": {
+            "type": "string",
+            "format": "time",
+            "nullable": true
+          },
+          "checkOut": {
+            "type": "string",
+            "format": "time",
+            "nullable": true
+          },
+          "workingHours": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "lateMinutes": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "earlyLeaveMinutes": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "remarks": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CancellationToken": {
+        "type": "object",
+        "properties": {
+          "isCancellationRequested": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "canBeCanceled": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "waitHandle": {
+            "$ref": "#/components/schemas/WaitHandle"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CheckInCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/AttendanceDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompanyDto": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyPhone": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscriptionPlan": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateOrUpdateCompanyUpSertCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/CompanyDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateOrUpdateUpSertCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/EmployeeDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DepartmentDto": {
+        "type": "object",
+        "properties": {
+          "departmentId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "departmentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "employeeCount": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EditRoleCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/RoleDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmployeeDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "departmentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "employeeCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "roleId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "joinDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "salary": {
+            "type": "number",
+            "format": "double"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntPtr": {
+        "type": "object",
+        "additionalProperties": false
+      },
+      "LeaveRequestDto": {
+        "type": "object",
+        "properties": {
+          "leaveRequestId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "companyId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "employeeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "leaveTypeId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "fromDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "toDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "totalDays": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "approvedBy": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "approvedByName": {
+            "type": "string",
+            "nullable": true
+          },
+          "approvedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "airecommendation": {
+            "type": "string",
+            "nullable": true
+          },
+          "ainotes": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LeaveRequestStatusEnum": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "LeaveRequestUpSertCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/LeaveRequestDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoleDto": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "roleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "isActive": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SafeWaitHandle": {
+        "type": "object",
+        "properties": {
+          "isClosed": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "isInvalid": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateLeaveRequestStatusCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/AttendanceDto"
+          },
+          "fromDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "toDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "ct": {
+            "$ref": "#/components/schemas/CancellationToken"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpsertDepartmentCommand": {
+        "type": "object",
+        "properties": {
+          "dto": {
+            "$ref": "#/components/schemas/DepartmentDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WaitHandle": {
+        "type": "object",
+        "properties": {
+          "handle": {
+            "$ref": "#/components/schemas/IntPtr"
+          },
+          "safeWaitHandle": {
+            "$ref": "#/components/schemas/SafeWaitHandle"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Attendance"
+    },
+    {
+      "name": "Auth"
+    },
+    {
+      "name": "Company"
+    },
+    {
+      "name": "Department"
+    },
+    {
+      "name": "Employee"
+    },
+    {
+      "name": "Leave"
+    },
+    {
+      "name": "Payroll"
+    },
+    {
+      "name": "Role"
+    }
+  ]
+}

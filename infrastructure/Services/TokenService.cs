@@ -21,10 +21,10 @@ public class TokenService(IConfiguration config) : ITokenService
 
         var claims = new[]
         {
-            new Claim(ClaimTypes.NameIdentifier, employee.EmployeeId.ToString()),
-            new Claim(ClaimTypes.Email, employee.Email),
-            new Claim(ClaimTypes.Name, employee.FirstName ?? " "),
-            new Claim(ClaimTypes.Role, employee.Role?.RoleName ?? ""),
+            new Claim("NameIdentifier", employee.EmployeeId.ToString()),
+            new Claim("Email", employee.Email),
+            new Claim("Name", employee.FirstName ?? " "),
+            new Claim("Role", employee.Role?.RoleName ?? ""),
         };
 
         var token = new JwtSecurityToken(

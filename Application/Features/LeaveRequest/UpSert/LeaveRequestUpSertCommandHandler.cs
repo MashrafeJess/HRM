@@ -56,7 +56,7 @@ public class LeaveRequestUpSertCommandHandler(
             if (string.Equals(status, LeaveRequestStatusEnum.Approved.ToString(), StringComparison.OrdinalIgnoreCase))
             {
                 var userIdValue = _httpContextAccessor.HttpContext?.User
-                    .FindFirstValue(ClaimTypes.NameIdentifier);
+                    .FindFirstValue("NameIdentifier");
 
                 if (!long.TryParse(userIdValue, out var userId))
                 {

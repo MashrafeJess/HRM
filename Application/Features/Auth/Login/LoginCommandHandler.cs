@@ -46,6 +46,6 @@ public class LoginCommandHandler(
         await _authRepository.AddRefreshTokenAsync(refreshToken, cancellationToken);
         await _authRepository.SaveChangesAsync(cancellationToken);
 
-        return new AuthResponseDto(accessToken, rawRefreshToken);
+        return new AuthResponseDto(accessToken, rawRefreshToken,employee.EmployeeId, employee.CompanyId, employee.DepartmentId);
     }
 }
