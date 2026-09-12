@@ -17,7 +17,7 @@
   },
   {
     "ContainingType": "Web_API.Controllers.AttendanceController",
-    "Method": "CheckIn",
+    "Method": "GetAttendanceByDate",
     "RelativePath": "api/Attendance/GetAttendanceByDate",
     "HttpMethod": "GET",
     "IsController": true,
@@ -38,7 +38,7 @@
   },
   {
     "ContainingType": "Web_API.Controllers.AttendanceController",
-    "Method": "CheckIn",
+    "Method": "GetAttendanceByEmployeeId",
     "RelativePath": "api/Attendance/GetAttendanceByEmployeeId",
     "HttpMethod": "GET",
     "IsController": true,
@@ -192,12 +192,12 @@
       },
       {
         "Name": "PageNumber",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
         "Name": "PageSize",
-        "Type": "System.Int32",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       }
     ],
@@ -231,6 +231,21 @@
         "Name": "companyId",
         "Type": "System.Int64",
         "IsRequired": true
+      },
+      {
+        "Name": "ViewOrder",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageNumber",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

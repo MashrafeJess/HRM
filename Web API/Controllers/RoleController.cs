@@ -13,7 +13,7 @@ public class RoleController(IMediator mediator) : ControllerBase
 {
    private readonly IMediator _mediator = mediator;
    [HttpPost("AddOrUpdateRole")]
-   [Authorize(Roles = "Super Admin")]
+   [Authorize(Roles = "Super Admin, Company Admin")]
    public async Task<IActionResult> EditRole(EditRoleCommand command, CancellationToken ct)
    {
       var result = await _mediator.Send(command, ct);
@@ -21,7 +21,7 @@ public class RoleController(IMediator mediator) : ControllerBase
    }
 
    [HttpGet("GetAllRoles")]
-   [Authorize(Roles = "Super Admin")]
+   [Authorize(Roles = "Super Admin, Company Admin")]
    public async Task<IActionResult> GetAllRoles(CancellationToken ct)
    {
       var result = await _mediator.Send(new GetRoleQuery(), ct);
@@ -29,7 +29,7 @@ public class RoleController(IMediator mediator) : ControllerBase
    }
 
    [HttpGet("GetRoleById/{roleId:long}")]
-   [Authorize(Roles = "Super Admin")]
+   [Authorize(Roles = "Super Admin, Company Admin")]
    public async Task<IActionResult> GetEmployeeById( long roleId, CancellationToken ct)
    {
       var query = new GetRoleByIdQuery(roleId);

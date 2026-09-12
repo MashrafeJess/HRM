@@ -17,6 +17,7 @@ public class GetLeaveRequestByStatusQueryHandler (ILeaveRepository repository) :
                 LeaveRequestId = g.LeaveRequestId,
                 CompanyId = g.CompanyId,
                 EmployeeId = g.EmployeeId,
+                EmployeeName = g.EmployeeName,
                 LeaveTypeId = g.LeaveTypeId,
                 FromDate = g.FromDate,
                 ToDate = g.ToDate,

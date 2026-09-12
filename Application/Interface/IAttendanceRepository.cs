@@ -22,6 +22,8 @@ public interface IAttendanceRepository
 
     public Task<Attendance> GetAttendanceById(long? attendanceId, CancellationToken ct);
 
+    public Task<Attendance?> GetAttendanceForEmployeeOnDate(long employeeId, DateOnly date, CancellationToken ct);
+
     public Task<List<Attendance>> GetAttendanceOnCertainRange(long employeeId, DateOnly fromDate, DateOnly toDate,
         CancellationToken ct);
 }

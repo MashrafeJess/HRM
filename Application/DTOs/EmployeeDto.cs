@@ -33,5 +33,5 @@ public class EmployeeDto : IRequest
 
     public string Status { get; set; } = null!;
     
-    public bool? IsActive { get; set; } = false;
+    public bool? IsActive { get; set; }
 }

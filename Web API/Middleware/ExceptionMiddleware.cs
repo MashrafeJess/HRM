@@ -20,6 +20,11 @@ public class ExceptionMiddleware(RequestDelegate next)
             context.Response.StatusCode = 404;
             await context.Response.WriteAsJsonAsync(new { error = ex.Message });
         }
+        catch (ForbiddenException ex)
+        {
+            context.Response.StatusCode = 403;
+            await context.Response.WriteAsJsonAsync(new { error = ex.Message });
+        }
         catch (UnauthorizedAccessException ex)
         {
             context.Response.StatusCode = 401;

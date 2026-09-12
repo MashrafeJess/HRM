@@ -25,6 +25,7 @@ public class TokenService(IConfiguration config) : ITokenService
             new Claim("Email", employee.Email),
             new Claim("Name", employee.FirstName ?? " "),
             new Claim("Role", employee.Role?.RoleName ?? ""),
+            new Claim("CompanyId", employee.CompanyId.ToString()),
         };
 
         var token = new JwtSecurityToken(

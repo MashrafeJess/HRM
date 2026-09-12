@@ -2,6 +2,7 @@
 using Application.Features.LeaveRequest.Get;
 using Application.Features.LeaveRequest.GetByStatus;
 using Application.Features.LeaveRequest.GetHistory;
+using Application.Features.LeaveRequest.Approve;
 using Application.Features.Attendance.UpdateOnLeaveRequest;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -14,6 +15,17 @@ namespace Web_API.Controllers;
 public class LeaveController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
+
+    [HttpPost("ApproveLeaveRequest")]
+    [Authorize(Roles = "Company Admin")]
+    public async Task<IActionResult> ApproveLeaveRequest(
+        [FromBody] ApproveLeaveRequestCommand command,
+        CancellationToken ct)
+    {
+        await _mediator.Send(command, ct);
+        return Ok();
+    }
+
     [HttpPost("AddLeaveRequest")]
     [Authorize(Roles = "Common")]
     public async Task<IActionResult> AddLeaveRequest(LeaveRequestUpSertCommand command, CancellationToken ct)

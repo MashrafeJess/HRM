@@ -16,40 +16,55 @@ public class CheckInCommandHandler(IAttendanceRepository repository)
         var dto = request.Dto;
         var now = DateTime.Now;
         var currentTime = TimeOnly.FromDateTime(now);
-        Domain.Models.Attendance attendance;
+        var attendanceDate = dto.AttendanceDate == default
+            ? DateOnly.FromDateTime(now)
+            : dto.AttendanceDate;
 
-        if (dto.AttendanceId is null or 0)
+        // Resolve any existing row for this employee/date before deciding what this
+        // call means — the daily mark-absent job may have already inserted an
+        // "Absent" row (with no CheckIn) before the employee actually checks in, so
+        // "an attendance row already exists" must NOT be read as "this is a check-out".
+        var attendance = dto.AttendanceId is null or 0
+            ? await _repository.GetAttendanceForEmployeeOnDate(dto.EmployeeId, attendanceDate, cancellationToken)
+            : await _repository.GetAttendanceById(dto.AttendanceId, cancellationToken);
+
+        if (attendance is null)
         {
+            // No row yet for this employee/date: first check-in of the day.
             attendance = new Domain.Models.Attendance
             {
                 CompanyId = dto.CompanyId,
                 EmployeeId = dto.EmployeeId,
-                AttendanceDate = dto.AttendanceDate == default
-                    ? DateOnly.FromDateTime(now)
-                    : dto.AttendanceDate,
+                AttendanceDate = attendanceDate,
                 CheckIn = currentTime,
                 Status = GetStatus(currentTime),
                 LateMinutes = (currentTime <= ShiftStart) ? new TimeOnly(0,0) : GetDuration(currentTime - ShiftStart),
                 CreatedAt = now
             };
         }
-        else
+        else if (attendance.CheckIn is null)
         {
-            attendance = await _repository.GetAttendanceById(dto.AttendanceId, cancellationToken);
-
-            if (attendance.CheckIn is null)
-            {
-                throw new InvalidOperationException("Cannot check out before checking in.");
-            }
-
-            attendance.AttendanceId = dto.AttendanceId ?? 0;
-            attendance.CompanyId =  dto.CompanyId;
+            // A row already exists (e.g. auto-marked "Absent") but the employee
+            // hasn't actually checked in yet today — this is still a check-in.
+            attendance.CompanyId = dto.CompanyId;
             attendance.EmployeeId = dto.EmployeeId;
-            
+            attendance.CheckIn = currentTime;
+            attendance.Status = GetStatus(currentTime);
+            attendance.LateMinutes = (currentTime <= ShiftStart) ? new TimeOnly(0,0) : GetDuration(currentTime - ShiftStart);
+        }
+        else if (attendance.CheckOut is null)
+        {
+            // Already checked in, not yet checked out — this is a check-out.
+            attendance.CompanyId = dto.CompanyId;
+            attendance.EmployeeId = dto.EmployeeId;
             attendance.CheckOut = currentTime;
             attendance.EarlyLeaveMinutes = GetDuration(ShiftEnd - currentTime);
-            attendance.WorkingHours = attendance.CheckOut.HasValue ? Math.Round(
-                (decimal)(currentTime - attendance.CheckIn.Value).TotalHours, 2) : null;
+            attendance.WorkingHours = Math.Round(
+                (decimal)(currentTime - attendance.CheckIn.Value).TotalHours, 2);
+        }
+        else
+        {
+            throw new InvalidOperationException("Already checked in and checked out for this date.");
         }
 
         await _repository.CreateOrUpdateAttendance(attendance, cancellationToken);

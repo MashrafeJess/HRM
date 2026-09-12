@@ -1,17 +1,44 @@
-﻿using Application.DTOs;
+﻿using Application.Common.Exceptions;
+using Application.DTOs;
 using Application.Interface;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 namespace Application.Features.Company.CreateOrUpdate;
 
-public class CompanyUpSertCommandHandler(ICompanyRepository repository)
+public class CompanyUpSertCommandHandler(ICompanyRepository repository, IHttpContextAccessor httpContextAccessor)
     : IRequestHandler<CreateOrUpdateCompanyUpSertCommand, CompanyDto>
 {
     private readonly ICompanyRepository _companyRepository = repository;
+    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
 
     public async Task<CompanyDto> Handle(CreateOrUpdateCompanyUpSertCommand request,
         CancellationToken cancellationToken)
     {
+        // Only "Super Admin" may create a new company or edit a company other than
+        // their own. "Company Admin" may only edit the single company tied to their
+        // account. [Authorize(Roles = "Super Admin, Company Admin")] on the controller
+        // only checks role membership — it can't express "and only their own company" —
+        // so that part is enforced here using the CompanyId/Role claims from the token.
+        var user = _httpContextAccessor.HttpContext?.User;
+        var role = user?.FindFirstValue("Role") ?? "";
+        var isSuperAdmin = role == "Super Admin";
+
+        if (!isSuperAdmin)
+        {
+            if (request.Dto.CompanyId is null or 0)
+            {
+                throw new ForbiddenException("Only a Super Admin can create a new company.");
+            }
+
+            var callerCompanyIdRaw = user?.FindFirstValue("CompanyId");
+            if (!long.TryParse(callerCompanyIdRaw, out var callerCompanyId) || callerCompanyId != request.Dto.CompanyId)
+            {
+                throw new ForbiddenException("A Company Admin can only edit their own company.");
+            }
+        }
+
         Domain.Models.Company company;
 
         if (request.Dto.CompanyId is null or 0)

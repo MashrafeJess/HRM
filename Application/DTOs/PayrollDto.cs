@@ -8,6 +8,8 @@ public class PayrollDto
 
     public long EmployeeId { get; set; }
 
+    public string? EmployeeName { get; set; }
+
     public long Month { get; set; } 
 
     public long Year { get; set; }

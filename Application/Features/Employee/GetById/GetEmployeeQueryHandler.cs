@@ -14,6 +14,7 @@ public class GetEmployeeQueryHandler(IEmployeeRepository employeeRepository) : I
             var employee = await _employeeRepository.GetEmployeeById(request.EmployeeId, cancellationToken);
             return new EmployeeDto
             {
+                Id = employee.EmployeeId,
                 CompanyId = employee.CompanyId,
                 DepartmentId = employee.DepartmentId,
                 EmployeeCode = employee.EmployeeCode,

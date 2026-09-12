@@ -10,9 +10,22 @@ public class AuthRepository(IAppDbContext context) : IAuthRepository
 
     public async Task<Employee?> GetEmployeeByEmailAsync(
         string email, CancellationToken ct)
-        => await _context.Employees
-            .Include(r => r.Role)
+    {
+        // Resolve Role separately instead of .Include(r => r.Role): RoleId is a
+        // non-nullable FK with no DB constraint enforcing it, so a dangling RoleId
+        // (pointing at a deleted/missing role) must not turn into a false "invalid
+        // credentials" by silently dropping the employee row via an inner join.
+        var employee = await _context.Employees
             .FirstOrDefaultAsync(e => e.Email == email, ct);
+
+        if (employee is not null)
+        {
+            employee.Role = await _context.Roles
+                .FirstOrDefaultAsync(r => r.RoleId == employee.RoleId, ct);
+        }
+
+        return employee;
+    }
 
     public async Task<RefreshToken?> GetRefreshTokenAsync(
         string token, CancellationToken ct)

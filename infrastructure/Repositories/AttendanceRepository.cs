@@ -214,6 +214,12 @@ public class AttendanceRepository(IAppDbContext context) : IAttendanceRepository
         }
     }
 
+    public async Task<Attendance?> GetAttendanceForEmployeeOnDate(long employeeId, DateOnly date, CancellationToken ct)
+    {
+        return await _context.Attendances
+            .FirstOrDefaultAsync(a => a.EmployeeId == employeeId && a.AttendanceDate == date, ct);
+    }
+
     public async Task MarkAbsentEmployeeAsync(DateOnly date, CancellationToken ct)
     {
         await _context.Database.ExecuteSqlInterpolatedAsync(

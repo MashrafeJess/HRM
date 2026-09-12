@@ -19,6 +19,7 @@ public class GetPayrollForCompanyQueryHandler(IPayrollRepository repository) : I
                 PayrollId = x.PayrollId,
                 CompanyId = x.CompanyId,
                 EmployeeId = x.EmployeeId,
+                EmployeeName = x.EmployeeName,
                 Month = x.Month,
                 Year = x.Year,
                 BasicSalary = x.BasicSalary,
