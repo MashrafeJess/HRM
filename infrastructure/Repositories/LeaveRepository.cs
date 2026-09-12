@@ -66,12 +66,15 @@ public class LeaveRepository(IAppDbContext context)  : ILeaveRepository
             var query = _context.LeaveRequests.Where(l => l.CompanyId == companyId).AsQueryable();
 
             var leaveRequests = from l in query
+                join employee in _context.Employees
+                    on l.EmployeeId equals employee.EmployeeId
                 join approver in _context.Employees
                     on l.ApprovedBy equals (long?)approver.EmployeeId into approverJoin
                 from approver in approverJoin.Where(e => e.IsActive).DefaultIfEmpty()
                 select new
                 {
                     LeaveRequest = l,
+                    EmployeeName = employee.FirstName + " " + employee.LastName,
                     ApprovedByName = approver == null
                         ? null
                         : approver.FirstName + " " + approver.LastName
@@ -87,6 +90,7 @@ public class LeaveRepository(IAppDbContext context)  : ILeaveRepository
             foreach (var result in results)
             {
                 result.LeaveRequest.ApprovedByName = result.ApprovedByName;
+                result.LeaveRequest.EmployeeName = result.EmployeeName;
             }
 
             return [.. results.Select(result => result.LeaveRequest)];

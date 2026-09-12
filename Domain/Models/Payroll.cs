@@ -21,4 +21,7 @@ public partial class Payroll
     public decimal? NetSalary { get; set; }
 
     public DateTime? GeneratedAt { get; set; }
+
+    [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+    public string? EmployeeName { get; set; }
 }

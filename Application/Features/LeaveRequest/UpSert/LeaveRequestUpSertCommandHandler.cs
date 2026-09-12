@@ -1,17 +1,13 @@
 ﻿using Application.Interface;
 using Application.Common.Enums;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
 
 namespace Application.Features.LeaveRequest.UpSert;
 
 public class LeaveRequestUpSertCommandHandler(
-    ILeaveRepository repository,
-    IHttpContextAccessor httpContextAccessor) : IRequestHandler<LeaveRequestUpSertCommand, Unit>
+    ILeaveRepository repository) : IRequestHandler<LeaveRequestUpSertCommand, Unit>
 {
     private readonly ILeaveRepository _repository = repository;
-    private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
     public async Task<Unit> Handle(LeaveRequestUpSertCommand request, CancellationToken cancellationToken)
     {
         var dto = request.Dto;
@@ -36,7 +32,7 @@ public class LeaveRequestUpSertCommandHandler(
                 ToDate = dto.ToDate,
                 TotalDays = totalDays,
                 Reason = dto.Reason ?? " ",
-                Status = dto.Status ?? LeaveRequestStatusEnum.Pending.ToString(),
+                Status = LeaveRequestStatusEnum.Pending.ToString(),
                 CreatedAt = DateTime.UtcNow
             };
             await _repository.ApplyLeave(leave, cancellationToken).ConfigureAwait(false);
@@ -50,29 +46,6 @@ public class LeaveRequestUpSertCommandHandler(
             leave.ToDate = dto.ToDate;
             leave.Ainotes = dto.Ainotes;
             leave.Airecommendation = dto.Airecommendation;
-            var status = dto.Status ?? leave.Status;
-            leave.Status = status;
-
-            if (string.Equals(status, LeaveRequestStatusEnum.Approved.ToString(), StringComparison.OrdinalIgnoreCase))
-            {
-                var userIdValue = _httpContextAccessor.HttpContext?.User
-                    .FindFirstValue("NameIdentifier");
-
-                if (!long.TryParse(userIdValue, out var userId))
-                {
-                    throw new UnauthorizedAccessException(
-                        "The authenticated user's employee ID was not found in the token.");
-                }
-
-                leave.ApprovedBy = userId;
-                leave.ApprovedAt = DateTime.UtcNow;
-            }
-            else
-            {
-                leave.ApprovedBy = null;
-                leave.ApprovedAt = null;
-            }
-
             leave.LeaveTypeId = dto.LeaveTypeId;
             leave.TotalDays = totalDays;
             

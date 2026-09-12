@@ -2,11 +2,15 @@
 using Infrastructure.DbContexts;
 using Infrastructure.Repositories;
 using Infrastructure.Services;
+using Infrastructure.Services.Ai;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using OpenAI;
+using System.ClientModel;
 using System.Text;
 
 namespace Infrastructure;
@@ -40,6 +44,32 @@ public static class DependencyInjection
         services.AddScoped<IPasswordService, PasswordService>();
         services.AddScoped<IPayrollService, PayrollCalculateService>();
 
+        // ✅ AI assistant (any OpenAI-compatible endpoint: Groq, Ollama, OpenAI...)
+        services.AddSingleton<IChatClient>(_ =>
+        {
+            var ai = config.GetSection("AiSettings");
+            var apiKey = ai["ApiKey"];
+            if (string.IsNullOrWhiteSpace(apiKey))
+            {
+                throw new InvalidOperationException("AiSettings:ApiKey is missing.");
+            }
+
+            var openAi = new OpenAIClient(
+                new ApiKeyCredential(apiKey),
+                new OpenAIClientOptions
+                {
+                    Endpoint = new Uri(ai["BaseUrl"] ?? throw new InvalidOperationException("AiSettings:BaseUrl is missing.")),
+                    NetworkTimeout = TimeSpan.FromSeconds(60)
+                });
+
+            var model = ai["Model"] ?? throw new InvalidOperationException("AiSettings:Model is missing.");
+
+            return new ChatClientBuilder(openAi.GetChatClient(model).AsIChatClient())
+                .UseFunctionInvocation(configure: c => c.MaximumIterationsPerRequest = 8)
+                .Build();
+        });
+        services.AddScoped<IHrAssistantService, HrAssistantService>();
+
         // ✅ Authentication
         var jwt = config.GetSection("JwtSettings");
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -65,6 +95,20 @@ public static class DependencyInjection
                     // so [Authorize(Roles = "...")] needs to know to look there.
                     RoleClaimType = "Role",
                     NameClaimType = "Name"
+                };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        Console.WriteLine($"[JWT] Authentication failed: {context.Exception}");
+                        return Task.CompletedTask;
+                    },
+                    OnChallenge = context =>
+                    {
+                        Console.WriteLine($"[JWT] Challenge issued. Error: {context.Error}, Description: {context.ErrorDescription}, AuthFailure: {context.AuthenticateFailure}");
+                        return Task.CompletedTask;
+                    }
                 };
             });
 

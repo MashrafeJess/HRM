@@ -8,6 +8,8 @@ public class LeaveRequestDto
 
     public long EmployeeId { get; set; }
 
+    public string? EmployeeName { get; set; }
+
     public long LeaveTypeId { get; set; }
 
     public DateTime FromDate { get; set; }

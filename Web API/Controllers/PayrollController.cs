@@ -1,5 +1,6 @@
 ﻿using Application.Features.Payroll.GetForCompany;
 using Application.Features.Payroll.GetForEmployee;
+using Application.Features.Payroll.GetLiveStatusForEmployee;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ public class PayrollController(IMediator mediator) : ControllerBase
 {
     private readonly IMediator _mediator = mediator;
     [HttpGet("GetPayRollForEmployee")]
-    [Authorize(Roles = "Company Admin")]
+    [Authorize(Roles = "Company Admin,Common")]
     public async Task<IActionResult> GetPayRollForEmployee([FromQuery]long employeeId, long yearId, long monthId, CancellationToken ct)
     {
         var result = await _mediator.Send(new GetPayrollForEmployeeQuery(employeeId, monthId, yearId, ct), ct);
@@ -26,5 +27,13 @@ public class PayrollController(IMediator mediator) : ControllerBase
         var result = await _mediator.Send(new GetPayrollForCompanyQuery(companyId, monthId, yearId, ct), ct);
         return Ok(result);
     }
-    
+
+    [HttpGet("GetPayrollStatusForEmployee")]
+    [Authorize(Roles = "Company Admin")]
+    public async Task<IActionResult> GetPayrollStatusForEmployee([FromQuery] long employeeId, CancellationToken ct)
+    {
+        var result = await _mediator.Send(new GetPayrollStatusForEmployeeQuery(employeeId), ct);
+        return Ok(result);
+    }
+
 }

@@ -33,7 +33,7 @@ public class CompanyController(IMediator mediator) : ControllerBase
     }
 
     [HttpGet("GetCompanyById/{companyId:long}")]
-    [Authorize(Roles = "Super Admin")]
+    [Authorize(Roles = "Super Admin, Company Admin")]
     public async Task<IActionResult> GetCompanyById(long companyId, CancellationToken ct)
     {
         var query = new GetCompanyByIdQuery(companyId);

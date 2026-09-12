@@ -40,6 +40,7 @@ namespace Web_API.Controllers
             });
         }
         
+        [AllowAnonymous]
         [HttpPost("refresh")]
         public async Task<IActionResult> Refresh(CancellationToken ct)
         {
@@ -65,7 +66,7 @@ namespace Web_API.Controllers
                 result.DepartmentId
             });
         }
-
+            
         [HttpPost("logout")]
         public async Task<IActionResult> Logout(CancellationToken ct)
         {

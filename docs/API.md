@@ -6,7 +6,7 @@ This document describes every HTTP endpoint exposed by the HRM Web API, for use 
 
 - **Base URL**: `https://<host>/api`
 - **Auth**: The backend issues a JWT (see `POST /api/Auth/login`) containing claims `NameIdentifier` (employee id), `Email`, `Name` (first name), and `Role` (role name, free-text from the `Roles` table — there is no fixed enum of role names in this system; roles are created ad-hoc via `POST /api/Role/AddOrUpdateRole`).
-- **⚠️ Current state**: no controller or action in the backend has an `[Authorize]` attribute yet (only `Login` has `[AllowAnonymous]`). Every endpoint below is reachable without a token today. The "Roles allowed" field in each section states what *should* eventually be enforced based on the nature of the action — treat it as a TODO for the backend, not as current behavior. Do not build frontend logic that assumes the backend already rejects unauthorized calls.
+- **⚠️ Current state**: `[Authorize]` is now enforced on every controller. Every endpoint below has a "🔒 Enforced" note stating the exact role(s) required — these are literal `Roles.RoleName` values, matching case-sensitively (`Super Admin`, `Company Admin`, `Common` are the ones currently used in code; see [Known backend quirks](#known-backend-quirks) for gaps). Send `Authorization: Bearer <accessToken>` on every call and handle `401` (missing/expired/invalid token) and `403` (valid token, wrong role).
 - **Nullable fields**: a field marked `nullable` is optional in requests and may be `null` in responses. A field with no `nullable` marker is required in requests and always present in responses.
 - **Pagination wrapper**: any endpoint returning `PagedResult<T>` responds with:
   ```json
@@ -32,7 +32,8 @@ This document describes every HTTP endpoint exposed by the HRM Web API, for use 
 6. [Attendance](#attendance)
 7. [Leave](#leave)
 8. [Payroll](#payroll)
-9. [Known backend quirks](#known-backend-quirks)
+9. [AI Assistant](#ai-assistant)
+10. [Known backend quirks](#known-backend-quirks)
 
 ---
 
@@ -100,7 +101,7 @@ Base route: `api/Company`
 
 ### POST `/api/Company/EditCompany`
 
-Roles allowed: Admin (create/edit company records is an administrative action — not currently enforced).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Super Admin`, `Company Admin`.
 
 **Request body** (`CompanyDto`) — send `companyId: null` to create, or an existing id to update:
 
@@ -138,7 +139,7 @@ Roles allowed: Admin (create/edit company records is an administrative action �
 
 ### GET `/api/Company/GetAllCompany`
 
-Roles allowed: any authenticated user (read-only).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Super Admin` only.
 
 **Query params** (`PageFilterDto`):
 
@@ -179,7 +180,7 @@ Example: `GET /api/Company/GetAllCompany?pageNumber=1&pageSize=100&viewOrder=des
 
 ### GET `/api/Company/GetCompanyById/{companyId}`
 
-Roles allowed: any authenticated user (read-only).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Super Admin` only.
 
 **Route param**: `companyId` (`long`, required).
 
@@ -193,7 +194,7 @@ Base route: `api/Department`
 
 ### POST `/api/Department/EditDepartment`
 
-Roles allowed: Admin, Manager.
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
 
 **Request body** (`DepartmentDto`):
 
@@ -214,13 +215,13 @@ Roles allowed: Admin, Manager.
 
 ### GET `/api/Department/AllDepartmentsByCompanyId/{companyId}`
 
-Roles allowed: any authenticated user (read-only).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
 
 **Route param**: `companyId` (`long`, required).
 
 **Query params** (`PageFilterDto`): same as Company's — `viewOrder` (nullable, default `"desc"`), `pageNumber` (nullable, default `1`), `pageSize` (nullable, default `50`, max `100`).
 
-**Response**: `200 OK`, `PagedResult<DepartmentDto>`. ⚠️ Items only populate `departmentId`, `companyId`, `departmentName`, `description`, `isActive` — `employeeCount` and timestamps are `null`/default (use `GetDepartmentById` if you need `employeeCount`).
+**Response**: `200 OK`, `PagedResult<DepartmentDto>`. Each item includes `employeeCount` (computed per department). ⚠️ Timestamps (`createdAt`/`updatedAt`) are still `null`/default on this endpoint — use `GetDepartmentById` if you need those.
 
 ---
 
@@ -228,7 +229,7 @@ Roles allowed: any authenticated user (read-only).
 
 ⚠️ Note the missing `/` before the route parameter — the real path has no separator, e.g. `GET /api/Department/GetDepartmentById5` for id `5`. This is almost certainly an unintentional bug in the backend route template; confirm behavior against a running instance before wiring this up, since fixing it later will change the URL your frontend must call.
 
-Roles allowed: any authenticated user (read-only).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
 
 **Route param**: `departmentId` (`long`, required).
 
@@ -242,7 +243,7 @@ Base route: `api/Employee`
 
 ### POST `/api/Employee/AddOrUpdateEmployee`
 
-Roles allowed: Admin, Manager.
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
 
 **Request body** (`EmployeeDto`):
 
@@ -272,7 +273,7 @@ Roles allowed: Admin, Manager.
 
 ### GET `/api/Employee/GetAllEmployeesByCompanyId/{companyId}`
 
-Roles allowed: any authenticated user (read-only).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
 
 **Route param**: `companyId` (`long`, required).
 
@@ -291,7 +292,7 @@ Roles allowed: any authenticated user (read-only).
 
 ### GET `/api/Employee/GetEmployeeById/{employeeId}`
 
-Roles allowed: any authenticated user (read-only).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
 
 **Route param**: `employeeId` (`long`, required).
 
@@ -305,7 +306,7 @@ Base route: `api/Role`
 
 ### POST `/api/Role/AddOrUpdateRole`
 
-Roles allowed: Admin only.
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Super Admin` only.
 
 **Request body** (`RoleDto`):
 
@@ -323,7 +324,7 @@ Roles allowed: Admin only.
 
 ### GET `/api/Role/GetAllRoles`
 
-Roles allowed: any authenticated user (read-only) — needed to populate role dropdowns e.g. on the employee form.
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Super Admin` only. ⚠️ This is needed to populate role dropdowns (e.g. on the employee form), but `Company Admin` — the role that actually calls `AddOrUpdateEmployee` — is locked out of it. Flag this to the backend owner; as written, a Company Admin can't populate the role picker they need.
 
 **Request**: no params.
 
@@ -333,7 +334,7 @@ Roles allowed: any authenticated user (read-only) — needed to populate role dr
 
 ### GET `/api/Role/GetRoleById/{roleId}`
 
-Roles allowed: any authenticated user (read-only).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Super Admin` only.
 
 **Route param**: `roleId` (`long`, required).
 
@@ -349,7 +350,7 @@ Base route: `api/Attendance`
 
 ⚠️ The literal route contains an unencoded `&`. When calling from Angular's `HttpClient`, do not URL-encode it yourself — pass the path as-is (`/api/Attendance/CheckIn&CheckOut`); most HTTP clients leave `&` untouched in a path segment. Verify against a live call before relying on this.
 
-Roles allowed: Employee (self check-in/out), Admin/Manager (on behalf of others).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin`, `Common`.
 
 **Request body** (wraps `AttendanceDto` under a `dto` key, since the command is `CheckInCommand(AttendanceDto Dto)`):
 
@@ -389,7 +390,7 @@ Roles allowed: Employee (self check-in/out), Admin/Manager (on behalf of others)
 
 ### GET `/api/Attendance/GetAttendanceByDate`
 
-Roles allowed: Admin, Manager.
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin`, `Common`.
 
 **Query params**: `companyId` (`long`, required), `date` (`DateOnly`, `"YYYY-MM-DD"`, required).
 
@@ -399,7 +400,7 @@ Roles allowed: Admin, Manager.
 
 ### GET `/api/Attendance/GetAttendanceByEmployeeId`
 
-Roles allowed: Employee (own records), Admin/Manager (any).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin`, `Common`.
 
 **Query params**: `employeeId` (`long`, required).
 
@@ -409,7 +410,7 @@ Roles allowed: Employee (own records), Admin/Manager (any).
 
 ### GET `/api/Attendance/GetAttendancesStatisticsByEmployeeId`
 
-Roles allowed: Employee (own), Admin/Manager (any).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin`, `Common`.
 
 **Query params**: `employeeId` (`long`, required), `monthId` (`int`, required), `yearId` (`int`, required).
 
@@ -426,7 +427,7 @@ Roles allowed: Employee (own), Admin/Manager (any).
 
 ### GET `/api/Attendance/GetAttendanceSummaryForMonth`
 
-Roles allowed: Admin, Manager.
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
 
 **Query params**: `companyId` (`long`, required), `monthId` (`int`, required), `yearId` (`long`, required).
 
@@ -457,7 +458,7 @@ Roles allowed: Admin, Manager.
 
 ### GET `/api/Attendance/GetAttendanceSummaryForADay`
 
-Roles allowed: Admin, Manager.
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
 
 **Query params**: `companyId` (`long`, required), `date` (`DateOnly`, `"YYYY-MM-DD"`, required).
 
@@ -480,7 +481,7 @@ Base route: `api/Leave`
 
 ### POST `/api/Leave/AddLeaveRequest`
 
-Roles allowed: Employee (create own request), Admin/Manager (approve/reject via `status`).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Common` only. ⚠️ Note this is the *only* role that can call this endpoint — including for the "approve/reject via `status`" path, since there's no separate approval endpoint here (that's `UpdateLeaveRequestStatus`, which is `Company Admin`-only).
 
 **Request body** (wraps `LeaveRequestDto` under `dto`):
 
@@ -495,7 +496,7 @@ Roles allowed: Employee (create own request), Admin/Manager (approve/reject via 
 | `totalDays` | `int` | ignored — recomputed server-side, don't rely on the value you send |
 | `reason` | `string?` | nullable |
 | `status` | `string?` | nullable — defaults to `"Pending"` on create; set to `"Approved"`/`"Rejected"`/`"Cancelled"` to action a request (see `LeaveRequestStatusEnum` below) |
-| `approvedBy` | `long?` | nullable — set server-side from the acting user when status becomes `Approved` (⚠️ see [Known backend quirks](#known-backend-quirks) — this currently depends on auth claims that aren't enforced yet) |
+| `approvedBy` | `long?` | nullable — set server-side from the acting user's `NameIdentifier` claim when status becomes `Approved` (⚠️ since this endpoint is `Common`-role-only, "approver" here means whichever authenticated `Common` user made the call — there's no separate Admin/Manager approval path) |
 | `approvedByName` | `string?` | nullable, response-only |
 | `approvedAt` | `DateTime?` | nullable, response-only |
 | `airecommendation` | `string?` | nullable |
@@ -507,7 +508,7 @@ Roles allowed: Employee (create own request), Admin/Manager (approve/reject via 
 
 ### GET `/api/Leave/GetLeaveRequestByEmployeeId?employeeId={id}`
 
-Roles allowed: Employee (own), Admin/Manager (any).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin`, `Common`.
 
 **Query params**: `employeeId` (`long`, required).
 
@@ -517,7 +518,7 @@ Roles allowed: Employee (own), Admin/Manager (any).
 
 ### GET `/api/Leave/GetLeaveRequestByStatus`
 
-Roles allowed: Admin, Manager.
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin`, `Common`.
 
 **Query params**: `id` (int or string name of `LeaveRequestStatusEnum`: `All=0`, `Pending=1`, `Approved=2`, `Rejected=3`, `Cancelled=4`), `companyId` (`long`, required).
 
@@ -527,7 +528,7 @@ Roles allowed: Admin, Manager.
 
 ### GET `/api/Leave/GetEmployeeLeaveRequestsByEmployeeId?employeeId={id}`
 
-Roles allowed: Employee (own), Admin/Manager (any).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
 
 **Query params**: `employeeId` (`long`, required).
 
@@ -539,7 +540,7 @@ Roles allowed: Employee (own), Admin/Manager (any).
 
 Marks a date range as "On Leave" in the attendance records (used after approving a leave request).
 
-Roles allowed: Admin, Manager.
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
 
 **Request body**:
 
@@ -559,7 +560,7 @@ Base route: `api/Payroll`
 
 ### GET `/api/Payroll/GetPayRollForEmployee`
 
-Roles allowed: Employee (own), Admin/Manager (any).
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
 
 **Query params**: `employeeId` (`long`, required), `yearId` (`long`, required), `monthId` (`long`, required).
 
@@ -582,7 +583,7 @@ Roles allowed: Employee (own), Admin/Manager (any).
 
 ### GET `/api/Payroll/GetPayRollForCompany`
 
-Roles allowed: Admin, Manager.
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
 
 **Query params**: `companyId` (`long`, required), `yearId` (`long`, required), `monthId` (`long`, required).
 
@@ -590,11 +591,65 @@ Roles allowed: Admin, Manager.
 
 ---
 
+### GET `/api/Payroll/GetPayrollStatusForEmployee`
+
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
+
+Live, **non-persisted** payroll projection for the current month: computed on every call from this month's attendance so far using the exact same formula as real payroll generation. Nothing is written to the database.
+
+**Query params**: `employeeId` (`long`, required). The month/year are always the current month (server time) — they cannot be chosen.
+
+**Response**: `200 OK`, `PayrollDto`. `payrollId` is always `0` and `generatedAt` is always `null` — that is how the frontend can tell this is an estimate, not a generated payroll record. `employeeName` is populated. The value changes day to day as attendance accrues.
+
+---
+
+## AI Assistant
+
+Base route: `api/Ai`
+
+### GET `/api/Ai/Ask?question={text}`
+
+🔒 **Enforced**: requires `Authorization: Bearer <accessToken>`. Roles allowed: `Company Admin` only.
+
+Natural-language Q&A over the caller's own company data. The question is answered by an LLM that can only call a fixed set of read-only backend tools (attendance and leave) — it never writes SQL and never sees other companies' data (the company is taken from the token's `CompanyId` claim, not from the request). Stateless: each question must be self-contained (no conversation memory). Answers are given in the language the question was asked in.
+
+**Query params**:
+
+| Field | Type | Notes |
+|---|---|---|
+| `question` | `string` | required, max 1000 characters |
+
+Example: `GET /api/Ai/Ask?question=Who%20was%20late%20the%20most%20in%20September%3F`
+
+**Response**: `200 OK`, `AiAnswerDto`:
+
+| Field | Type | Notes |
+|---|---|---|
+| `question` | `string` | the question as received (trimmed) |
+| `answer` | `string` | plain-text answer (may contain line breaks / simple bullet lists) |
+| `toolsUsed` | `string[]` | names of the backend data tools the AI called to produce the answer — show this to the user as "based on: …" for trust, or use it for debugging. Empty if the AI answered without fetching data (e.g. asked for clarification). |
+
+```json
+{
+  "question": "Who was late the most in September?",
+  "answer": "In September 2026 the highest number of late arrivals was Sahadat Sanbid (4 late days).",
+  "toolsUsed": ["get_attendance_summary_for_month"]
+}
+```
+
+What it can answer at launch (tools available to the model): company attendance summary for a day or a month, all attendance records for a day, one employee's attendance statistics for a month, one employee's attendance records over a date range, leave requests by status (Pending/Approved/Rejected/Cancelled/All), one employee's leave history, and employee lookup by name/code (id, name, code, department id, status — no salary/contact data). Payroll and salary questions are **not** answerable yet.
+
+Errors: `400` if `question` is missing/too long; `403` if the token has no `CompanyId` claim; `500`/`502`-style failures if the LLM provider is unreachable, rate-limited (Groq free tier), or the `AiSettings:ApiKey` is not configured. Typical latency is 2–10 s — show a loading state.
+
+---
+
 ## Known backend quirks
 
 Things discovered while surveying the code that will bite you if the Angular side assumes "normal" REST behavior. Flag these to the backend owner rather than working around them silently in the frontend, since some are outright bugs:
 
-1. **No authorization is enforced anywhere yet.** Every `Roles allowed` note above is aspirational — the backend accepts unauthenticated calls on every endpoint today. Don't build frontend logic that depends on the backend rejecting an unauthorized role; it currently won't.
+1. **Authorization is now enforced everywhere.** Every controller action requires a bearer token and a matching role — see each endpoint's "🔒 Enforced" note for the exact role(s). Calling one without a token, with an expired token, or with the wrong role now gets `401`/`403`. Watch for these gaps discovered while surveying the code:
+   - `GET /api/Role/GetAllRoles` is `Super Admin`-only, but `Company Admin` is the role that actually needs it to populate a role picker on the employee form (`POST /api/Employee/AddOrUpdateEmployee` is `Company Admin`-only). A `Company Admin` user cannot currently fetch the role list to build that dropdown — flag this to the backend owner rather than working around it (e.g. don't hardcode a role list on the frontend).
+   - `POST /api/Leave/AddLeaveRequest` is `Common`-only, including the "approve/reject via `status`" path — there is no separate `Company Admin`/manager approval endpoint for leave requests. If an approval workflow restricted to admins/managers is expected, this is a backend gap, not a frontend one.
 2. **`GET /api/Department/GetDepartmentById{departmentId}`** has no `/` before the id — the real URL is e.g. `.../GetDepartmentById5`, not `.../GetDepartmentById/5`. Confirm this against a live call.
 3. Several "edit" endpoints echo back an **incomplete DTO** rather than the full saved record: `EditCompany` (missing id/timestamps), `EditDepartment` (missing id/employeeCount/timestamps), `AddOrUpdateRole` (missing timestamps). If you need the generated id or full record after a create, re-fetch it with the matching `GetById`/`GetAll` endpoint.
 4. **`AddLeaveRequest`** returns an empty `{}` body, not the saved leave request — re-fetch if you need it.

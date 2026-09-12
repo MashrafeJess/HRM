@@ -31,7 +31,7 @@ public class DepartmentRepository(IAppDbContext context) : IDepartmentRepository
         }
     }
 
-    public async Task<(List<Department> Departments, int TotalCount)> GetAllDepartments(long companyId, string? viewOrder, int pageNumber, int pageSize, CancellationToken cancellationToken)
+    public async Task<(List<(Department Department, int EmployeeCount)> Departments, int TotalCount)> GetAllDepartments(long companyId, string? viewOrder, int pageNumber, int pageSize, CancellationToken cancellationToken)
     {
         try
         {
@@ -47,9 +47,14 @@ public class DepartmentRepository(IAppDbContext context) : IDepartmentRepository
             var departments = await query
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
+                .Select(d => new
+                {
+                    Department = d,
+                    EmployeeCount = _context.Employees.Count(e => e.DepartmentId == d.DepartmentId)
+                })
                 .ToListAsync(cancellationToken);
 
-            return (departments, totalCount);
+            return (departments.Select(d => (d.Department, d.EmployeeCount)).ToList(), totalCount);
         }
         catch (Exception e)
         {

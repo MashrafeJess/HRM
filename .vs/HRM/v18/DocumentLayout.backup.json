@@ -3,6 +3,30 @@
   "WorkspaceRootPath": "C:\\Users\\iBOS\\source\\repos\\HRM\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A9464F1F-C4D0-4518-B305-1A0F007E51F6}|Web API\\Web API.csproj|c:\\users\\ibos\\source\\repos\\hrm\\web api\\controllers\\attendancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9464F1F-C4D0-4518-B305-1A0F007E51F6}|Web API\\Web API.csproj|solutionrelative:web api\\controllers\\attendancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\features\\attendance\\checkin_checkout\\checkincommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\features\\attendance\\checkin_checkout\\checkincommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6AEFCD10-728D-4E21-8CBE-BD444CFC0B36}|infrastructure\\Infrastructure.csproj|c:\\users\\ibos\\source\\repos\\hrm\\infrastructure\\repositories\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6AEFCD10-728D-4E21-8CBE-BD444CFC0B36}|infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\employeerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\features\\employee\\getbyid\\getemployeequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\features\\employee\\getbyid\\getemployeequeryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\features\\auth\\login\\logincommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\login\\logincommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A9464F1F-C4D0-4518-B305-1A0F007E51F6}|Web API\\Web API.csproj|c:\\users\\ibos\\source\\repos\\hrm\\web api\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A9464F1F-C4D0-4518-B305-1A0F007E51F6}|Web API\\Web API.csproj|solutionrelative:web api\\controllers\\employeecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3DC6828B-2F47-4B1A-BC30-E64C8D41931D}|Domain\\Domain.csproj|c:\\users\\ibos\\source\\repos\\hrm\\domain\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3DC6828B-2F47-4B1A-BC30-E64C8D41931D}|Domain\\Domain.csproj|solutionrelative:domain\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,14 +37,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\features\\auth\\refresh\\refreshcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\refresh\\refreshcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\features\\auth\\login\\logincommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|solutionrelative:application\\features\\auth\\login\\logincommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6AEFCD10-728D-4E21-8CBE-BD444CFC0B36}|infrastructure\\Infrastructure.csproj|c:\\users\\ibos\\source\\repos\\hrm\\infrastructure\\repositories\\authrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6AEFCD10-728D-4E21-8CBE-BD444CFC0B36}|infrastructure\\Infrastructure.csproj|solutionrelative:infrastructure\\repositories\\authrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EDDBB323-175B-41A8-AB23-68E286E8E8E1}|Application\\Application.csproj|c:\\users\\ibos\\source\\repos\\hrm\\application\\features\\auth\\logout\\logoutcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -95,19 +111,67 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Employee.cs",
-              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Models\\Employee.cs",
-              "RelativeDocumentMoniker": "Domain\\Models\\Employee.cs",
-              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Models\\Employee.cs",
-              "RelativeToolTip": "Domain\\Models\\Employee.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAQwAUAAAAAAAAAAAAAAA==",
+              "Title": "AttendanceController.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Web API\\Controllers\\AttendanceController.cs",
+              "RelativeDocumentMoniker": "Web API\\Controllers\\AttendanceController.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Web API\\Controllers\\AttendanceController.cs",
+              "RelativeToolTip": "Web API\\Controllers\\AttendanceController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-05T17:50:43.482Z",
+              "WhenOpened": "2026-09-05T08:03:34.193Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "CheckInCommand.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Attendance\\CheckIn_CheckOut\\CheckInCommand.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Attendance\\CheckIn_CheckOut\\CheckInCommand.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Attendance\\CheckIn_CheckOut\\CheckInCommand.cs",
+              "RelativeToolTip": "Application\\Features\\Attendance\\CheckIn_CheckOut\\CheckInCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-05T08:03:24.478Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EmployeeRepository.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\infrastructure\\Repositories\\EmployeeRepository.cs",
+              "RelativeDocumentMoniker": "infrastructure\\Repositories\\EmployeeRepository.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\infrastructure\\Repositories\\EmployeeRepository.cs",
+              "RelativeToolTip": "infrastructure\\Repositories\\EmployeeRepository.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAowEEAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-05T07:58:09.211Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GetEmployeeQueryHandler.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Employee\\GetById\\GetEmployeeQueryHandler.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Employee\\GetById\\GetEmployeeQueryHandler.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Employee\\GetById\\GetEmployeeQueryHandler.cs",
+              "RelativeToolTip": "Application\\Features\\Employee\\GetById\\GetEmployeeQueryHandler.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAYwAwAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-05T07:16:50.846Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Models\\Employee.cs",
+              "RelativeDocumentMoniker": "Domain\\Models\\Employee.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Models\\Employee.cs",
+              "RelativeToolTip": "Domain\\Models\\Employee.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAxwA4AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-05T17:50:43.482Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "TokenService.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\infrastructure\\Services\\TokenService.cs",
               "RelativeDocumentMoniker": "infrastructure\\Services\\TokenService.cs",
@@ -120,18 +184,30 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "AuthRepository.cs",
-              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\infrastructure\\Repositories\\AuthRepository.cs",
-              "RelativeDocumentMoniker": "infrastructure\\Repositories\\AuthRepository.cs",
-              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\infrastructure\\Repositories\\AuthRepository.cs",
-              "RelativeToolTip": "infrastructure\\Repositories\\AuthRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAFAAAAAAAAAA==",
+              "Title": "LoginCommandHandler.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Login\\LoginCommandHandler.cs",
+              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Login\\LoginCommandHandler.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Login\\LoginCommandHandler.cs",
+              "RelativeToolTip": "Application\\Features\\Auth\\Login\\LoginCommandHandler.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAYwBUAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-05T17:45:16.457Z"
+              "WhenOpened": "2026-07-05T16:37:08.377Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "EmployeeController.cs",
+              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Web API\\Controllers\\EmployeeController.cs",
+              "RelativeDocumentMoniker": "Web API\\Controllers\\EmployeeController.cs",
+              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Web API\\Controllers\\EmployeeController.cs",
+              "RelativeToolTip": "Web API\\Controllers\\EmployeeController.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAgwCoAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-05T07:16:19.192Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "LogoutCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Logout\\LogoutCommandHandler.cs",
               "RelativeDocumentMoniker": "Application\\Features\\Auth\\Logout\\LogoutCommandHandler.cs",
@@ -143,7 +219,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "LogoutCommand.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Logout\\LogoutCommand.cs",
               "RelativeDocumentMoniker": "Application\\Features\\Auth\\Logout\\LogoutCommand.cs",
@@ -155,7 +231,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "RefreshCommandHandler.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Refresh\\RefreshCommandHandler.cs",
               "RelativeDocumentMoniker": "Application\\Features\\Auth\\Refresh\\RefreshCommandHandler.cs",
@@ -167,7 +243,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "RefreshCommand.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Refresh\\RefreshCommand.cs",
               "RelativeDocumentMoniker": "Application\\Features\\Auth\\Refresh\\RefreshCommand.cs",
@@ -179,19 +255,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LoginCommandHandler.cs",
-              "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Login\\LoginCommandHandler.cs",
-              "RelativeDocumentMoniker": "Application\\Features\\Auth\\Login\\LoginCommandHandler.cs",
-              "ToolTip": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Login\\LoginCommandHandler.cs",
-              "RelativeToolTip": "Application\\Features\\Auth\\Login\\LoginCommandHandler.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAMwBwAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-05T16:37:08.377Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "LoginCommand.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Features\\Auth\\Login\\LoginCommand.cs",
               "RelativeDocumentMoniker": "Application\\Features\\Auth\\Login\\LoginCommand.cs",
@@ -203,7 +267,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "RefreshToken.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Models\\RefreshToken.cs",
               "RelativeDocumentMoniker": "Domain\\Models\\RefreshToken.cs",
@@ -215,7 +279,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "DependencyInjection.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\infrastructure\\DependencyInjection.cs",
               "RelativeDocumentMoniker": "infrastructure\\DependencyInjection.cs",
@@ -227,7 +291,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "IApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\Common\\Interfaces\\IApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Application\\Common\\Interfaces\\IApplicationDbContext.cs",
@@ -239,7 +303,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "AuthResponseDto.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\DTOs\\AuthResponseDto.cs",
               "RelativeDocumentMoniker": "Application\\DTOs\\AuthResponseDto.cs",
@@ -251,7 +315,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "LoginDto.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Application\\DTOs\\LoginDto.cs",
               "RelativeDocumentMoniker": "Application\\DTOs\\LoginDto.cs",
@@ -263,7 +327,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "ITokenService.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Interface\\ITokenService.cs",
               "RelativeDocumentMoniker": "Domain\\Interface\\ITokenService.cs",
@@ -275,7 +339,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "IAuthRepository.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\Interface\\IAuthRepository.cs",
               "RelativeDocumentMoniker": "Domain\\Interface\\IAuthRepository.cs",
@@ -287,7 +351,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Domain\\DbContexts\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Domain\\DbContexts\\AppDbContext.cs",
@@ -299,7 +363,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\iBOS\\source\\repos\\HRM\\Web API\\appsettings.Development.json",
               "RelativeDocumentMoniker": "Web API\\appsettings.Development.json",

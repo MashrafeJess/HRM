@@ -14,11 +14,12 @@ public class GetAllDepartmentByCompanyIdQueryHandler(IDepartmentRepository repos
         {
             Items = departments.Select(d => new DepartmentDto
             {
-                DepartmentId = d.DepartmentId,
-                CompanyId = d.CompanyId,
-                DepartmentName = d.DepartmentName,
-                Description = d.Description,
-                IsActive = d.IsActive,
+                DepartmentId = d.Department.DepartmentId,
+                CompanyId = d.Department.CompanyId,
+                DepartmentName = d.Department.DepartmentName,
+                Description = d.Department.Description,
+                IsActive = d.Department.IsActive,
+                EmployeeCount = d.EmployeeCount,
             }).ToList(),
             PageNumber = request.PageNumber,
             PageSize = request.PageSize,

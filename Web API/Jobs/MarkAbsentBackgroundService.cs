@@ -32,6 +32,8 @@ public sealed class MarkAbsentBackgroundService(
         logger.LogInformation(
             "Mark-absent background service started. It runs daily at 9:30 AM Bangladesh time.");
 
+        await RunCatchUpIfNeededAsync(stoppingToken);
+
         while (!stoppingToken.IsCancellationRequested)
         {
             var nowUtc = DateTime.UtcNow;
@@ -87,6 +89,44 @@ public sealed class MarkAbsentBackgroundService(
                     ex,
                     "Mark-absent job failed for {AttendanceDate}.", attendanceDate);
             }
+        }
+    }
+
+    private async Task RunCatchUpIfNeededAsync(CancellationToken stoppingToken)
+    {
+        var nowBangladesh = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, BangladeshTimeZone);
+
+        if (nowBangladesh.TimeOfDay < RunTime)
+        {
+            // Today's 9:30 AM run hasn't happened yet — the normal loop below will wait for it.
+            return;
+        }
+
+        var today = DateOnly.FromDateTime(nowBangladesh);
+
+        if (WeeklyHolidayCalendar.IsHoliday(today))
+        {
+            logger.LogInformation(
+                "Startup catch-up: skipping {Date} because it is a weekly holiday.", today);
+            return;
+        }
+
+        try
+        {
+            using var scope = scopeFactory.CreateScope();
+            var job = scope.ServiceProvider.GetRequiredService<MarkAbsentJob>();
+
+            await job.MarkAbsentJobAsync(today, stoppingToken);
+
+            logger.LogInformation("Startup catch-up: mark-absent job completed for {Date}.", today);
+        }
+        catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
+        {
+            throw;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Startup catch-up: mark-absent job failed for {Date}.", today);
         }
     }
 }
