@@ -72,7 +72,7 @@ public class PayrollRepository(IAppDbContext context, IPayrollService service) :
         var payroll = await _context.Payrolls
             .Where(x => x.EmployeeId == employeeId && x.Month == monthId && x.Year == yearId).FirstOrDefaultAsync(cancellationToken);
         
-        return payroll ?? throw new Exception("Payroll not found");
+        return payroll ?? throw new NotFoundException("Payroll not found");
     }
 
     public async Task<PayrollDto> GetLivePayrollStatusForEmployee(long employeeId, long monthId, long yearId, CancellationToken cancellationToken)

@@ -51,7 +51,7 @@ public class LeaveController(IMediator mediator) : ControllerBase
     }
     
     [HttpGet("GetEmployeeLeaveRequestsByEmployeeId")]
-    [Authorize(Roles = "Company Admin")]
+    [Authorize(Roles = "Company Admin,Common")]
     public async Task<IActionResult> GetEmployeeLeaveRequestsByEmployeeId([FromQuery] GetEmployeeLeaveRequestsByEmployeeIdQuery request, CancellationToken ct)
     {
         var result = await _mediator.Send(request, ct);
