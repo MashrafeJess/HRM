@@ -441,9 +441,12 @@ Base route: `api/Attendance`
 | `employeeList` | `PerfectAttendanceEmployeeSummaryDto[]?` | nullable, see below |
 | `mostPunctualDepartmentId` | `long?` | nullable |
 | `mostPunctualDepartmentName` | `string?` | nullable |
-| `lateRate` | `decimal?` | nullable |
-| `highestAbsenteeId` | `long?` | nullable |
-| `highestAbsenteeName` | `string?` | nullable |
+| `lateRate` | `decimal?` | nullable — this is the **most punctual department's** late rate, display it on that card |
+| `highestAbsenteeId` | `long?` | nullable — id of the first highest absentee (kept for compatibility; prefer `highestAbsentees`) |
+| `highestAbsenteeName` | `string?` | nullable — full name(s); on a tie all tied names joined with `", "`, e.g. `"Din Islam, Mash T, rakin a"` |
+| `highestAbsentees` | `PerfectAttendanceEmployeeSummaryDto[]` | every employee sharing the highest non-zero absent count (empty when nobody was absent) — use this to render the tie properly |
+
+Notes: `numOfPerfectAttendance` counts employees with zero absences in the month. `employeeList` contains **all** active employees with their absent counts (despite the DTO name), sorted by `totalAbsent` descending then name.
 
 `PerfectAttendanceEmployeeSummaryDto`:
 
@@ -637,7 +640,7 @@ Example: `GET /api/Ai/Ask?question=Who%20was%20late%20the%20most%20in%20Septembe
 }
 ```
 
-What it can answer at launch (tools available to the model): company attendance summary for a day or a month, all attendance records for a day, one employee's attendance statistics for a month, one employee's attendance records over a date range, leave requests by status (Pending/Approved/Rejected/Cancelled/All), one employee's leave history, and employee lookup by name/code (id, name, code, department id, status — no salary/contact data). Payroll and salary questions are **not** answerable yet.
+What it can answer at launch (tools available to the model): company attendance summary for a day or a month, per-employee attendance counts for a month (who was late/absent the most, rankings), all attendance records for a day, one employee's attendance statistics for a month, one employee's attendance records over a date range, leave requests by status (Pending/Approved/Rejected/Cancelled/All), one employee's leave history, and employee lookup by name/code (id, name, code, department id, status — no salary/contact data). Payroll and salary questions are **not** answerable yet.
 
 Errors: `400` if `question` is missing/too long; `403` if the token has no `CompanyId` claim; `500`/`502`-style failures if the LLM provider is unreachable, rate-limited (Groq free tier), or the `AiSettings:ApiKey` is not configured. Typical latency is 2–10 s — show a loading state.
 

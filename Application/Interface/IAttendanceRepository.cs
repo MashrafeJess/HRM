@@ -16,7 +16,10 @@ public interface IAttendanceRepository
         CancellationToken ct); 
 
     public Task<AttendanceSummaryForADayDto> GetAttendanceSummaryForADay(long companyId, DateOnly date,
-        CancellationToken ct); 
+        CancellationToken ct);
+
+    public Task<List<EmployeeMonthlyAttendanceDto>> GetMonthlyAttendanceByEmployee(long companyId, int month, int year,
+        CancellationToken ct);
 
     public Task MarkAbsentEmployeeAsync(DateOnly date, CancellationToken ct);
 

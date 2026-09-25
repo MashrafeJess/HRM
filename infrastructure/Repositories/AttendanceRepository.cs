@@ -103,9 +103,13 @@ public class AttendanceRepository(IAppDbContext context) : IAttendanceRepository
                     EmployeeId = g.Key.EmployeeId,
                     EmployeeName = g.Key.FirstName + " " + g.Key.LastName,
                     DepartmentName = g.Key.DepartmentName,
-                    TotalAbsent = g.Count(x=>x.Status == "Absent"), 
+                    TotalAbsent = g.Count(x=>x.Status == "Absent"),
                 })
+                .OrderByDescending(e => e.TotalAbsent)
+                .ThenBy(e => e.EmployeeName)
                 .ToList();
+
+            var perfectAttendanceCount = employeesWithPerfectAttendance.Count(e => e.TotalAbsent == 0);
                     
             var departmentPunctuality = (from  a in attendanceList
                                         join e in employeeList on a.EmployeeId equals e.EmployeeId
@@ -131,28 +135,28 @@ public class AttendanceRepository(IAppDbContext context) : IAttendanceRepository
             
             var punctualDepartment = departmentPunctuality.FirstOrDefault();
 
-            var highestAbsentNigga = attendanceList.Where(a => a.Status == "Absent")
-                .GroupBy(a => a.EmployeeId)
-                .Select(g => new
-                {
-                    EmployeeId = g.Key,
-                    AbsentCount = g.Count(),
-                })
-                .OrderByDescending(g => g.AbsentCount)
-                .FirstOrDefault();
-            var absenteeEmployee = highestAbsentNigga is null ? null :  employeeList.FirstOrDefault(e => e.EmployeeId == highestAbsentNigga.EmployeeId);
+            // The list is sorted by TotalAbsent desc, so everyone sharing the top
+            // non-zero count is a "highest absentee" — all of them are reported on a tie.
+            var maxAbsent = employeesWithPerfectAttendance.FirstOrDefault()?.TotalAbsent ?? 0;
+            var highestAbsentees = maxAbsent > 0
+                ? employeesWithPerfectAttendance.Where(e => e.TotalAbsent == maxAbsent).ToList()
+                : [];
+            var highestAbsentee = highestAbsentees.FirstOrDefault();
 
             var result = new AttendanceSummaryDto
             {
                 AverageAttendanceRate = averageAttendanceRate,
                 TotalLateArrivals = totalLate,
-                NumOfPerfectAttendance = employeesWithPerfectAttendance.Count,
+                NumOfPerfectAttendance = perfectAttendanceCount,
                 EmployeeList = employeesWithPerfectAttendance,
                 MostPunctualDepartmentId = punctualDepartment?.DepartmentId,
                 MostPunctualDepartmentName = punctualDepartment?.DepartmentName,
                 LateRate = punctualDepartment?.LateRate,
-                HighestAbsenteeId = highestAbsentNigga?.EmployeeId,
-                HighestAbsenteeName = absenteeEmployee?.FirstName,
+                HighestAbsenteeId = highestAbsentee?.EmployeeId,
+                HighestAbsenteeName = highestAbsentees.Count == 0
+                    ? null
+                    : string.Join(", ", highestAbsentees.Select(e => e.EmployeeName)),
+                HighestAbsentees = highestAbsentees,
             };
             return result;
         }
@@ -197,6 +201,54 @@ public class AttendanceRepository(IAppDbContext context) : IAttendanceRepository
             TotalAbsent = totalAbsent,
             TotalAbsentArrival = totalAbsentArrival
         };
+    }
+
+    public async Task<List<EmployeeMonthlyAttendanceDto>> GetMonthlyAttendanceByEmployee(long companyId, int month, int year, CancellationToken ct)
+    {
+        var attendances = await _context.Attendances
+            .AsNoTracking()
+            .Where(a => a.CompanyId == companyId && a.AttendanceDate.Year == year && a.AttendanceDate.Month == month)
+            .ToListAsync(ct);
+
+        var employees = await _context.Employees
+            .AsNoTracking()
+            .Where(e => e.CompanyId == companyId && e.IsActive)
+            .ToListAsync(ct);
+
+        // Departments looked up separately rather than via Include: DepartmentId is a
+        // required FK with no DB constraint, so an orphaned id would turn the Include
+        // into an inner join and silently drop that employee from the results.
+        var departmentNames = await _context.Departments
+            .AsNoTracking()
+            .Where(d => d.CompanyId == companyId)
+            .ToDictionaryAsync(d => d.DepartmentId, d => d.DepartmentName, ct);
+
+        var byEmployee = attendances.ToLookup(a => a.EmployeeId);
+
+        return employees
+            .Select(e =>
+            {
+                var rows = byEmployee[e.EmployeeId].ToList();
+                return new EmployeeMonthlyAttendanceDto
+                {
+                    EmployeeId = e.EmployeeId,
+                    EmployeeName = $"{e.FirstName} {e.LastName}".Trim(),
+                    DepartmentName = departmentNames.GetValueOrDefault(e.DepartmentId),
+                    PresentDays = rows.Count(a => HasStatus(a, "Present")),
+                    LateDays = rows.Count(a => HasStatus(a, "Late")),
+                    AbsentDays = rows.Count(a => HasStatus(a, "Absent")),
+                    LeaveDays = rows.Count(a => HasStatus(a, "Leave") || HasStatus(a, "On Leave")),
+                    TotalLateMinutes = rows.Sum(a => a.LateMinutes.HasValue
+                        ? (int)a.LateMinutes.Value.ToTimeSpan().TotalMinutes
+                        : 0)
+                };
+            })
+            .OrderByDescending(x => x.LateDays)
+            .ThenByDescending(x => x.TotalLateMinutes)
+            .ToList();
+
+        static bool HasStatus(Attendance a, string status)
+            => string.Equals(a.Status, status, StringComparison.OrdinalIgnoreCase);
     }
 
     public async Task<Attendance> GetAttendanceById(long? attendanceId, CancellationToken ct)
