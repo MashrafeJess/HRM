@@ -27,6 +27,19 @@ public class AttendanceSummaryDto
     public decimal? LateRate { get; set; }
     public long? HighestAbsenteeId { get; set; }
     public string? HighestAbsenteeName { get; set; }
+    public List<PerfectAttendanceEmployeeSummaryDto> HighestAbsentees { get; set; } = [];
+}
+
+public class EmployeeMonthlyAttendanceDto
+{
+    public long EmployeeId { get; set; }
+    public string? EmployeeName { get; set; }
+    public string? DepartmentName { get; set; }
+    public int PresentDays { get; set; }
+    public int LateDays { get; set; }
+    public int AbsentDays { get; set; }
+    public int LeaveDays { get; set; }
+    public int TotalLateMinutes { get; set; }
 }
 
 public class AttendanceSummaryForADayDto

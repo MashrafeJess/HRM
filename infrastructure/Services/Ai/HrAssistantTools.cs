@@ -70,6 +70,32 @@ internal sealed class HrAssistantTools(
         return await attendanceRepository.GetAttendanceSummaryForMonth(companyId, month, year, ct);
     }
 
+    [Description("Per-employee attendance counts for a whole month: one row per active employee with present, late, absent and leave days plus total minutes late, sorted by most late days first. Use this for questions like who was late or absent the most, who has the best attendance, ranking or comparing employees, or how many times a named person was late in a month.")]
+    public async Task<object> GetMonthlyAttendanceByEmployee(
+        [Description("Month number, 1 to 12")] int month,
+        [Description("Four-digit year, e.g. 2026")] int year,
+        CancellationToken ct)
+    {
+        if (month is < 1 or > 12)
+        {
+            return new { error = "month must be between 1 and 12." };
+        }
+
+        var rows = await attendanceRepository.GetMonthlyAttendanceByEmployee(companyId, month, year, ct);
+
+        return rows.Select(r => new
+        {
+            r.EmployeeId,
+            r.EmployeeName,
+            r.DepartmentName,
+            r.PresentDays,
+            r.LateDays,
+            r.AbsentDays,
+            r.LeaveDays,
+            totalLate = FormatDuration(r.TotalLateMinutes)
+        }).ToList();
+    }
+
     [Description("Every attendance record of the company for one day: one row per employee with name, check-in and check-out time, status (Present, Late, Absent, On Leave) and minutes late.")]
     public async Task<object> GetAttendanceRecordsForDay(
         [Description("Date in yyyy-MM-dd format")] string date,
@@ -241,11 +267,23 @@ internal sealed class HrAssistantTools(
         checkIn = a.CheckIn?.ToString("HH:mm"),
         checkOut = a.CheckOut?.ToString("HH:mm"),
         a.Status,
-        lateMinutes = ToMinutes(a.LateMinutes),
-        earlyLeaveMinutes = ToMinutes(a.EarlyLeaveMinutes),
+        late = FormatDuration(ToMinutes(a.LateMinutes)),
+        earlyLeave = FormatDuration(ToMinutes(a.EarlyLeaveMinutes)),
         a.WorkingHours,
         a.Remarks
     };
+
+    private static string? FormatDuration(int? minutes)
+    {
+        if (minutes is null or 0)
+        {
+            return minutes is null ? null : "0m";
+        }
+
+        var hours = minutes.Value / 60;
+        var mins = minutes.Value % 60;
+        return hours == 0 ? $"{mins}m" : $"{hours}h {mins}m";
+    }
 
     private static object ToLeaveRow(LeaveRequest l, string? employeeName, Dictionary<long, string> names) => new
     {

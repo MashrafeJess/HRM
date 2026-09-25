@@ -60,14 +60,14 @@ public sealed class MarkAbsentBackgroundService(
 
             var attendanceDate = DateOnly.FromDateTime(nextRunLocal);
             
-            if (WeeklyHolidayCalendar.IsHoliday(attendanceDate))
-            {
-                logger.LogInformation(
-                    "Skipping {Date} because it is a weekly holiday.",
-                    attendanceDate);
-
-                continue;
-            }
+            // if (WeeklyHolidayCalendar.IsHoliday(attendanceDate))
+            // {
+            //     logger.LogInformation(
+            //         "Skipping {Date} because it is a weekly holiday.",
+            //         attendanceDate);
+            //
+            //     continue;
+            // }
 
             try
             {
@@ -104,12 +104,12 @@ public sealed class MarkAbsentBackgroundService(
 
         var today = DateOnly.FromDateTime(nowBangladesh);
 
-        if (WeeklyHolidayCalendar.IsHoliday(today))
-        {
-            logger.LogInformation(
-                "Startup catch-up: skipping {Date} because it is a weekly holiday.", today);
-            return;
-        }
+        // if (WeeklyHolidayCalendar.IsHoliday(today))
+        // {
+        //     logger.LogInformation(
+        //         "Startup catch-up: skipping {Date} because it is a weekly holiday.", today);
+        //     return;
+        // }
 
         try
         {
